@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/printf_history_fragment"
+    android:paddingTop="20dp"
+    tools:ignore="MissingDefaultResource">
+
+    <EditText
+        android:id="@+id/printfEditText"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:inputType="textMultiLine"
+        android:minLines="8"
+        android:maxLines="100"
+        android:gravity="top"
+        android:scrollbars="vertical"
+        android:background="@drawable/border_line_while"
+        android:textSize="23sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/printfButton"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:textSize="23sp"
+            android:background="@drawable/button_corner"
+            android:text="打印">
+
+        </Button>
+    </LinearLayout>
+</LinearLayout>
