@@ -7,14 +7,14 @@
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:paddingBottom="20dp"
-    android:background="@drawable/shape_corner"
+    android:background="@drawable/border_line_while"
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="450dp"
             android:layout_height="60dp"
             android:orientation="horizontal">
             <TextView
@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="模式名称:"
                 android:textSize="23dp"
+                android:textColor="#EEEEEE"
                 android:layout_gravity="bottom">
             </TextView>
 
@@ -31,11 +32,129 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:textSize="25sp"
+                android:textColor="#EEEEEE"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="5dp"
                 android:layout_gravity="bottom"
                 android:entries="@array/mode"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="任务名称："
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:layout_gravity="bottom">
+
+            </TextView>
+            <EditText
+                android:id="@+id/roomName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:typeface="monospace"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:layout_gravity="bottom"
+                android:ems="10"
+                android:text="手术室1" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="normal"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:text="空间面积:" />
+            <EditText
+                android:id="@+id/roomArea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:inputType="number"
+                android:ems="9">
+            </EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:text="   ㎡ "
+                >
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="normal"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:text="时间设置:" />
+            <EditText
+                android:id="@+id/editRoomTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:inputType="number"
+                android:ems="10">
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:layout_gravity="center"
+                android:text="min">
+
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <SeekBar
+            android:id="@+id/seekBarRoomTime"
+            android:layout_width="600dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:progress="20"
+            android:progressDrawable="@drawable/seekbar_style"
+            android:thumb="@drawable/selector_thumb_bar">
+        </SeekBar>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,111 +167,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="#00000000"
+            android:textColor="#EEEEEE"
             android:textSize="25sp"
             android:text="确定">
 
         </Button>
-
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="任务名称："
-            android:textSize="23dp"
-            android:layout_gravity="bottom">
-
-        </TextView>
-        <EditText
-            android:id="@+id/roomName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:typeface="monospace"
-            android:textSize="23dp"
-            android:layout_gravity="bottom"
-            android:ems="7"
-            android:text="手术室1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="normal"
-            android:textSize="23dp"
-            android:text="空间面积:" />
-        <EditText
-            android:id="@+id/roomArea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="23dp"
-            android:inputType="number"
-            android:ems="7">
-        </EditText>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="23dp"
-            android:text="   ㎡ "
-            ></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:typeface="normal"
-            android:textSize="23dp"
-            android:text="时间设置:" />
-        <EditText
-            android:id="@+id/editRoomTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="23dp"
-            android:inputType="number"
-            android:ems="7">
-        </EditText>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="23dp"
-            android:layout_gravity="center"
-            android:text="min"></TextView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-        <SeekBar
-            android:id="@+id/seekBarRoomTime"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:clickable="false"
-            android:progress="20"
-            android:progressDrawable="@drawable/seekbar_style"
-            android:thumb="@drawable/selector_thumb_bar">
-        </SeekBar>
 
     </LinearLayout>
 

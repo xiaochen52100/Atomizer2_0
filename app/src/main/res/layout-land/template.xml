@@ -1,103 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/template_fragment"
-    android:paddingTop="10dp">
+    android:background="#062333">
     <LinearLayout
-        android:layout_width="450dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="30dp"
+
         >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:typeface="monospace"
-            android:textSize="23dp"
-            android:textColor="#000000"
-            android:paddingBottom="10dp"
-            android:paddingTop="5dp"
-            android:text="消毒任务">
-
-        </TextView>
-        <ListView
-            android:id="@+id/templateList"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:divider="#ffffff"
-            android:dividerHeight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
         <Button
-            android:id="@+id/addNewRoomButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:text="新建消毒任务"
-            android:textSize="22dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="#ffffff"
-            android:background="@drawable/button_corner">
-
-        </Button>
-
-    </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-    <LinearLayout
-        android:layout_width="450dp"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingRight="30dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:typeface="monospace"
-            android:textSize="23dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="5dp"
-            android:textColor="#000000"
-            android:text="历史记录">
-
-        </TextView>
-        <ListView
-            android:id="@+id/historyList"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:divider="#ffffff"
-            android:dividerHeight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/moreHistoryButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:textSize="22dp"
-            android:textColor="#ffffff"
+            android:id="@+id/startButton3"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/button_corner"
-            android:text="更多历史记录查询">
-
+            android:text="设定任务"
+            android:textColor="#ffffff"
+            android:textSize="21sp">
         </Button>
+        <LinearLayout
+            android:layout_width="950dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/border_line_while"
+            >
+            <ListView
+                android:id="@+id/templateList"
+                android:layout_width="950dp"
+                android:layout_height="300dp"
+                android:divider="#062333"
+                android:layout_gravity="top"
+                android:dividerHeight="5dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="36dp"
+                android:background="@drawable/button_corner"
+                android:text="返回"
+                android:textColor="#ffffff"
+                android:textSize="21sp">
+
+            </Button>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+            </TextView>
+            <Button
+                android:id="@+id/addNewRoomButton"
+                android:layout_width="140dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="36dp"
+                android:text="新建任务"
+                android:textSize="21sp"
+                android:layout_gravity="center"
+                android:textColor="#ffffff"
+                android:background="@drawable/button_corner">
+            </Button>
+        </LinearLayout>
+
+<!--    </LinearLayout>-->
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1" />-->
+<!--    <LinearLayout-->
+<!--        android:layout_width="450dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:paddingRight="30dp">-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:typeface="monospace"-->
+<!--            android:textSize="23dp"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            android:paddingTop="5dp"-->
+<!--            android:textColor="#000000"-->
+<!--            android:text="历史记录">-->
+
+<!--        </TextView>-->
+<!--        <ListView-->
+<!--            android:id="@+id/historyList"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="400dp"-->
+<!--            android:divider="#ffffff"-->
+<!--            android:dividerHeight="10dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.0"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias="0.0" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/moreHistoryButton"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:textSize="22dp"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:background="@drawable/button_corner"-->
+<!--            android:text="更多历史记录查询">-->
+
+<!--        </Button>-->
     </LinearLayout>
 
 </LinearLayout>

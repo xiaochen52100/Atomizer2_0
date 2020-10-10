@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         barButton=findViewById(R.id.barButton);
         barLayout=findViewById(R.id.barLayout);
-        barTitle=findViewById(R.id.barTitle);
+//        barTitle=findViewById(R.id.barTitle);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, TemplateFragment.newInstance())
                     .commitNow();
             nowFragmentId=R.id.main;
         }

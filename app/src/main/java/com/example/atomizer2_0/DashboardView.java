@@ -25,6 +25,7 @@ public class DashboardView extends View {
     private int mSliceCountInOneBigSlice; // 划分一大份长的小份数
     private int mArcColor; // 弧度颜色
     private int mMeasureTextSize; // 刻度字体大小
+    private int mRealTimeTextSize;
     private int mTextColor; // 字体颜色
     private String mHeaderTitle = ""; // 表头
     private int mHeaderTextSize; // 表头字体大小
@@ -92,6 +93,7 @@ public class DashboardView extends View {
         mSliceCountInOneBigSlice = a.getInteger(R.styleable.DashboardView_sliceCountInOneBigSlice, 5);
         mArcColor = a.getColor(R.styleable.DashboardView_arcColor, Color.WHITE);
         mMeasureTextSize = a.getDimensionPixelSize(R.styleable.DashboardView_measureTextSize, spToPx(12));
+        mRealTimeTextSize = a.getDimensionPixelSize(R.styleable.DashboardView_realTimeTextSize, spToPx(12));
         mTextColor = a.getColor(R.styleable.DashboardView_textColor, mArcColor);
         mHeaderTitle = a.getString(R.styleable.DashboardView_headerTitle);
         if (mHeaderTitle == null) mHeaderTitle = "";
@@ -157,7 +159,7 @@ public class DashboardView extends View {
         mPaintValue.setColor(mTextColor);
         mPaintValue.setStyle(Paint.Style.STROKE);
         mPaintValue.setTextAlign(Paint.Align.CENTER);
-        mPaintValue.setTextSize(Math.max(mHeaderTextSize, mMeasureTextSize));
+        mPaintValue.setTextSize(Math.max(mHeaderTextSize, mRealTimeTextSize));
         mPaintValue.getTextBounds(trimFloat(mRealTimeValue), 0, trimFloat(mRealTimeValue).length(), mRectRealText);
 
         mHandler = new MyHandler();

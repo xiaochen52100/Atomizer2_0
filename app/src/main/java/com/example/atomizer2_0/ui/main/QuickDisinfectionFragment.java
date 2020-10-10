@@ -52,7 +52,7 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         View root = inflater.inflate(R.layout.quick_disinfection, container, false);
         MainActivity.nowFragmentId=R.id.quick_disinfection_fragment;
         MainActivity.lastFragmentId=R.id.quick_disinfection_fragment;
-        MainActivity.barTitle.setText("快速消毒");
+        //MainActivity.barTitle.setText("快速消毒");
         startImageButton=root.findViewById(R.id.startImageButton);
         stopImageButton=root.findViewById(R.id.stopImageButton);
         seekBarRoomTime=root.findViewById(R.id.seekBarRoomTime);
@@ -64,8 +64,8 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         humidityTextView=root.findViewById(R.id.humidityTextView);
         seekBarLevel=root.findViewById(R.id.seekBarLevel);
         dateTextView=root.findViewById(R.id.dateTextView);
-        startImageButton.setOnClickListener(this);
-        stopImageButton.setOnClickListener(this);
+//        startImageButton.setOnClickListener(this);
+//        stopImageButton.setOnClickListener(this);
         editListen=false;
         editTextTime.setText(0+"");
         editTextRoomName.setText("快速任务");
@@ -222,7 +222,7 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
                 //MainActivity.serialPortThread.sendSerialPort(sendBuf);
                 startImageButton.setEnabled(true);
             }else if (msg.what == 5){
-                dateTextView.setText((String)msg.obj);
+//                dateTextView.setText((String)msg.obj);
             }
 
         }
