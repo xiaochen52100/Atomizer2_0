@@ -42,8 +42,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         buttonSetting.setOnClickListener(this);
         MainActivity.nowFragmentId=R.id.main;
         MainActivity.lastFragmentId=R.id.main;
-        MainActivity.barTitle.setText("主界面");
-        barButton.setImageResource(R.mipmap.arrow_bold_left_128);
+//        MainActivity.barTitle.setText("主界面");
+//        barButton.setImageResource(R.mipmap.arrow_bold_left_128);
 
 
         return root;
@@ -60,28 +60,32 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.buttonQuick:
-                barButton.setVisibility(View.VISIBLE);
+//                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, QuickDisinfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonBroad:
-                barButton.setVisibility(View.VISIBLE);
+ //               barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, BroadDisnfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonProfession:
-                barButton.setVisibility(View.VISIBLE);
+//                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, ProfessionDisnfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonSetting:
-                barButton.setVisibility(View.VISIBLE);
+//                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, MainSettingFragment.newInstance())
+                        .replace(R.id.container, GenericFragment.newInstance())
                         .commitNow();
+//                MainActivity.checkList.clear();
+//                for (int i=0;i<MainActivity.historyData.size();i++){
+//                    MainActivity.checkList.add(false);
+//                }
                 break;
         }
     }

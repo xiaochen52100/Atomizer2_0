@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.example.atomizer2_0.MainActivity.historyData;
-import static com.example.atomizer2_0.ui.main.MoreHistoryFragment.checkList;
 
 public class PrintfHistoryFragment extends Fragment {
     private EditText printfEditText;
@@ -49,7 +48,7 @@ public class PrintfHistoryFragment extends Fragment {
         printfEditText.append("                           xxxx消毒记录                        \n\n");
         printfEditText.append("      消毒方式      任务名称      负责人      消毒时长      作业时间   \n\n");
         for (int i=0;i<historyData.size();i++){
-            if (checkList.get(i)){
+            if (MainActivity.checkList.get(i)){
                 String RoomName=historyData.get(i).getRoomName();
                 if (RoomName.length()<6){
                     for (int j=0;j<6-RoomName.length();j++){

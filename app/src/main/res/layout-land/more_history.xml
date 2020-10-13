@@ -5,20 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/more_history_fragment"
-    android:paddingTop="20dp">
+    android:background="@drawable/shape_corner"
+    android:id="@+id/more_history_fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        android:layout_height="50dp"
+        android:gravity="left"
+        android:background="#062333"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23sp"
-            android:paddingLeft="20dp"
-            android:paddingRight="40dp"
+            android:textColor="#EEEEEE"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_gravity="center"
             android:text="消毒方式">
 
         </TextView>
@@ -27,33 +30,50 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23sp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+            android:textColor="#EEEEEE"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_gravity="center"
             android:text="任务名称">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23sp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+            android:textColor="#EEEEEE"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_gravity="center"
             android:text="负责人">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23sp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+            android:textColor="#EEEEEE"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_gravity="center"
             android:text="消毒时间">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="23sp"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+            android:textColor="#EEEEEE"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_gravity="center"
             android:text="作业时间">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="23sp"
+            android:textColor="#EEEEEE"
+            android:paddingLeft="80dp"
+            android:layout_gravity="center"
+            android:text="操作">
         </TextView>
 
     </LinearLayout>
@@ -61,26 +81,25 @@
     <ListView
         android:id="@+id/moreHistoryList"
         android:layout_width="wrap_content"
-        android:layout_height="370dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="310dp"
+        android:layout_marginTop="10dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="52dp" />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/viewButton"
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:textSize="23sp"
-            android:background="@drawable/button_corner"
-            android:text="打印预览">
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="right"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:orientation="horizontal">-->
+<!--        <Button-->
+<!--            android:id="@+id/viewButton"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:textSize="23sp"-->
+<!--            android:background="@drawable/button_corner"-->
+<!--            android:text="打印预览">-->
 
-        </Button>
-    </LinearLayout>
+<!--        </Button>-->
+<!--    </LinearLayout>-->
 </LinearLayout>

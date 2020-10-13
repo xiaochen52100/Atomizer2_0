@@ -10,6 +10,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.example.atomizer2_0.ui.main.BroadDisnfectionFragment.broadHandler;
+import static com.example.atomizer2_0.ui.main.ProfessionDisnfectionFragment.professionHandler;
+import static com.example.atomizer2_0.ui.main.QuickDisinfectionFragment.quickHandler;
+
 public class SerialPortThread {
     private SerialPort serialPort;
     private boolean openFlag = false;
@@ -39,10 +43,19 @@ public class SerialPortThread {
                         if (serialPort != null) {
                             byte[] recvBytes = serialPort.receiveData(true);
                             if (recvBytes != null && recvBytes.length > 0) {
-                                Log.i("tag", "recvBytes === " + SerialPort.bytesToHexString(recvBytes, recvBytes.length));
-                                Message msg = new Message();
-                                msg.what = 2;
-                                msg.obj=recvBytes;
+//                                Log.i("tag", "recvBytes === " + SerialPort.bytesToHexString(recvBytes, recvBytes.length));
+//                                Message msg = new Message();
+//                                msg.what = 2;
+//                                msg.obj=recvBytes;
+//                                if (quickHandler!=null){
+//                                    quickHandler.sendMessage(msg);
+//
+//                                }else if(broadHandler!=null){
+//                                    broadHandler.sendMessage(msg);
+//
+//                                }else if(professionHandler!=null){
+//                                    professionHandler.sendMessage(msg);
+//                                }
 
                             }
                         }

@@ -2,17 +2,54 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/quick_disinfection_fragment"
+    android:id="@+id/broad_disinfection_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#062333"
     tools:ignore="MissingDefaultResource">
 
+    <com.example.atomizer2_0.DashboardView
+        android:id="@+id/dashboard_view_level3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="175dp"
+        android:layout_marginLeft="175dp"
+        android:layout_marginBottom="150dp"
+        app:arcColor="#EEEEEE"
+        app:bigSliceCount="4"
+        app:headerRadius="40dp"
+        app:headerTitle="液位"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:maxValue="4"
+        app:measureTextSize="12sp"
+        app:minValue="0"
+        app:radius="80dp"
+        app:realTimeTextSize="23sp"
+        app:realTimeValue="3"
+        app:startAngle="210"
+        app:stripeWidth="30dp"
+        app:sweepAngle="120" />
+
+    <Button
+        android:id="@+id/buttonParameter"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:background="@drawable/button_corner"
+        android:text="参数设置"
+        android:textColor="#ffffff"
+        android:textSize="21sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/startButton"
         android:layout_width="140dp"
         android:layout_height="60dp"
-        android:layout_marginStart="180dp"
+        android:layout_marginStart="162dp"
         android:layout_marginLeft="180dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_corner"
@@ -89,7 +126,7 @@
         android:id="@+id/countTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="205dp"
+        android:layout_marginStart="203dp"
         android:layout_marginLeft="203dp"
         android:layout_marginTop="140dp"
         android:text=" 0 \nsec"
@@ -120,24 +157,22 @@
 
         </ImageView>
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:text="快速消毒"
+            android:text="广谱消毒"
             android:textColor="#ffffff"
             android:textSize="21sp" />
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="450dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="65dp"
-        android:layout_marginRight="65dp"
+        android:layout_width="460dp"
+        android:layout_height="199dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
         android:background="@drawable/border_line_while"
         android:orientation="vertical"
         android:paddingLeft="20dp"
@@ -148,7 +183,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,44 +191,115 @@
             android:orientation="horizontal"
             android:paddingBottom="10dp">
 
-            <EditText
+            <TextView
                 android:id="@+id/roomName"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:layout_marginLeft="8dp"
-                android:text="请编辑任务名"
+                android:text="手术室1"
                 android:textColor="#EEEEEE"
                 android:textSize="23dp"
                 android:typeface="monospace" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/principalTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:text="负责人："
+                    android:textColor="#EEEEEE"
+                    android:textSize="21dp" />
+
+                <EditText
+                    android:id="@+id/principalEditText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="5"
+                    android:textColor="#EEEEEE">
+
+                </EditText>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:paddingBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="时间设置:"
-                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="空间设置:"
                 android:textColor="#EEEEEE"
                 android:textSize="21dp"
                 android:typeface="normal" />
 
 
             <EditText
-                android:id="@+id/editTextTime"
+                android:id="@+id/roomArea"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:ems="10"
+                android:enabled="false"
                 android:inputType="number"
+                android:textColor="#EEEEEE" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="min"
+                android:textColor="#EEEEEE">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="时间设置:"
                 android:textColor="#EEEEEE"
-                android:textSize="23sp" />
+                android:textSize="21dp"
+                android:typeface="normal" />
+
+
+            <EditText
+                android:id="@+id/roomTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="number"
+                android:textColor="#EEEEEE" />
 
             <TextView
                 android:id="@+id/textRoomTime"
@@ -208,24 +313,7 @@
             </TextView>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
 
-            <SeekBar
-                android:id="@+id/seekBarRoomTime"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:clickable="false"
-                android:progress="0"
-                android:progressDrawable="@drawable/seekbar_style"
-                android:thumb="@drawable/selector_thumb_bar">
-
-            </SeekBar>
-        </LinearLayout>
     </LinearLayout>
 
     <com.example.atomizer2_0.DashboardView
@@ -269,29 +357,6 @@
         app:arcColor="#FF0033"
         app:radius="110dp"
         app:realTimeValue="26"
-        app:startAngle="210"
-        app:stripeWidth="30dp"
-        app:sweepAngle="120" />
-
-    <com.example.atomizer2_0.DashboardView
-        android:id="@+id/dashboard_view_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
-        android:layout_marginLeft="175dp"
-        android:layout_marginBottom="150dp"
-        app:arcColor="#EEEEEE"
-        app:bigSliceCount="4"
-        app:headerRadius="40dp"
-        app:headerTitle="液位"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxValue="4"
-        app:measureTextSize="12sp"
-        app:minValue="0"
-        app:radius="80dp"
-        app:realTimeTextSize="23sp"
-        app:realTimeValue="3"
         app:startAngle="210"
         app:stripeWidth="30dp"
         app:sweepAngle="120" />

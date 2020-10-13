@@ -1,11 +1,13 @@
 package com.example.atomizer2_0.ui.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +29,6 @@ public class MoreHistoryFragment extends Fragment {
     private ListView moreHistoryList;
     private Button viewButton;
     private MoreHistoryAdapter moreHistoryAdapter;
-    public static List<Boolean> checkList=new ArrayList<Boolean>();
     public static MoreHistoryFragment newInstance() {
         return new MoreHistoryFragment();
     }
@@ -37,27 +38,25 @@ public class MoreHistoryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         MainActivity.nowFragmentId=R.id.more_history_fragment;
-        MainActivity.barTitle.setText("历史记录");
+        //MainActivity.barTitle.setText("历史记录");
         View root=inflater.inflate(R.layout.more_history, container, false);
         moreHistoryList = root.findViewById(R.id.moreHistoryList);
-        viewButton=root.findViewById(R.id.viewButton);
+
+        //viewButton=root.findViewById(R.id.viewButton);
 
         moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyData);
         moreHistoryList.setAdapter(moreHistoryAdapter);
 
-        checkList.clear();
-        for (int i=0;i<historyData.size();i++){
-            checkList.add(false);
-        }
 
-        viewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, PrintfHistoryFragment.newInstance())
-                        .commitNow();
-            }
-        });
+//
+//        viewButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .replace(R.id.container, PrintfHistoryFragment.newInstance())
+//                        .commitNow();
+//            }
+//        });
         return root;
     }
 

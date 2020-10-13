@@ -1,5 +1,6 @@
 package com.example.atomizer2_0.ui.main;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,29 +10,34 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.atomizer2_0.CircularProgressView;
+import com.example.atomizer2_0.DashboardView;
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 
+import static com.example.atomizer2_0.MainActivity.barDate;
 import static com.example.atomizer2_0.MainActivity.historyData;
 import static com.example.atomizer2_0.MainActivity.nowRoomData;
 import static com.example.atomizer2_0.MainActivity.sharedPreferenceUtil;
 
 public class QuickDisinfectionFragment extends Fragment implements View.OnClickListener{
     private QuickDisinfectionViewModel mQuickDisinfectionViewModel;
-    protected static ImageButton startImageButton;
-    protected ImageButton stopImageButton;
+    protected static Button startButton;
     protected SeekBar seekBarRoomTime;
     protected EditText editTextTime, editTextRoomName;
     private static TextView countTimeText;
@@ -40,6 +46,8 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
     private static TextView dateTextView;
     private SeekBar seekBarLevel;
     private boolean editListen=false;
+    private LinearLayout homeButton;
+    protected static DashboardView tempDashboardView,humDashboardView;
     private static CircularProgressView circularProgressView;
     public static QuickDisinfectionFragment newInstance() {
         return new QuickDisinfectionFragment();
@@ -53,8 +61,7 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         MainActivity.nowFragmentId=R.id.quick_disinfection_fragment;
         MainActivity.lastFragmentId=R.id.quick_disinfection_fragment;
         //MainActivity.barTitle.setText("快速消毒");
-        startImageButton=root.findViewById(R.id.startImageButton);
-        stopImageButton=root.findViewById(R.id.stopImageButton);
+        startButton=root.findViewById(R.id.startButton);
         seekBarRoomTime=root.findViewById(R.id.seekBarRoomTime);
         editTextTime=root.findViewById(R.id.editTextTime);
         editTextRoomName =root.findViewById(R.id.roomName);
@@ -64,14 +71,17 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         humidityTextView=root.findViewById(R.id.humidityTextView);
         seekBarLevel=root.findViewById(R.id.seekBarLevel);
         dateTextView=root.findViewById(R.id.dateTextView);
-//        startImageButton.setOnClickListener(this);
-//        stopImageButton.setOnClickListener(this);
+        tempDashboardView=root.findViewById(R.id.dashboard_view_temp);
+        humDashboardView=root.findViewById(R.id.dashboard_view_hum);
+        homeButton=root.findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(this);
         editListen=false;
         editTextTime.setText(0+"");
         editTextRoomName.setText("快速任务");
         editListen=true;
         seekListen();
         editTextListen();
+        startButton.setOnClickListener(this);
         return root;
     }
 
@@ -161,16 +171,16 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.startImageButton:
+            case R.id.startButton:
                 nowRoomData.setMode("快速消毒");
                 nowRoomData.setRoomTime(Integer.parseInt(editTextTime.getText().toString()));
                 if (!MainActivity.state&&nowRoomData.getRoomTime()>0){
 //                    if (nowRoomData.getRoomName().equals("未选择任务")){
 //                        Toast.makeText(getContext(), "请先选择任务", Toast.LENGTH_LONG).show();
 //                    }else{
-                        //byte[] sendBuf={0x25};
-                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                        nowRoomData.setTaskData(dateTextView.getText().toString());
+                        byte[] sendBuf={0x25};
+                        MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                        nowRoomData.setTaskData(barDate.getText().toString());
                         nowRoomData.setPrincipal("null");
                         if(historyData.size()<100){
                             historyData.add(nowRoomData);
@@ -181,25 +191,31 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
                         sharedPreferenceUtil.writeObject(getContext(),"HistoryList",historyData);
                         long currentTime = System.currentTimeMillis();
                         MainActivity.Countdown=currentTime+nowRoomData.getRoomTime()*60*1000;
-                        startImageButton.setEnabled(false);
+                        startButton.setText("停止");
+                        //startButton.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.button_corner_red, null));
                         MainActivity.state=true;
                         Toast.makeText(getContext(), "开启任务", Toast.LENGTH_LONG).show();
 //                    }
-
-                }else{
-                    Toast.makeText(getContext(), "开启已任务，请勿重复点击", Toast.LENGTH_LONG).show();
+                }else if(MainActivity.state){
+                    byte[] sendBuf={0x29};
+                    MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                    countTimeText.setText("  0 \nsec");
+                    circularProgressView.setProgress(0);
+                    MainActivity.Countdown=System.currentTimeMillis();
+                    startButton.setText("开始");
+                    //startButton.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button_corner));
+                    MainActivity.state=false;
+                    Toast.makeText(getContext(), "关闭任务", Toast.LENGTH_LONG).show();
                 }
                 break;
-            case R.id.stopImageButton:
-                //byte[] sendBuf={0x29};
-                //MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                countTimeText.setText("0 min");
-                circularProgressView.setProgress(0);
-
-                MainActivity.Countdown=System.currentTimeMillis();
-                startImageButton.setEnabled(true);
-                MainActivity.state=false;
-                Toast.makeText(getContext(), "关闭任务", Toast.LENGTH_LONG).show();
+            case R.id.homeButton:
+                if (MainActivity.state){
+                    Toast.makeText(getContext(), "任务进行中不可退出", Toast.LENGTH_LONG).show();
+                }else {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, MainFragment.newInstance())
+                            .commitNow();
+                }
                 break;
 
         }
@@ -211,16 +227,25 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
             if(msg.what == 1){
                 int progress= (int) (100-(double)msg.obj*100);
                 circularProgressView.setProgress((int) progress);
+            }else if(msg.what == 2){
+                byte[] rcvByte=(byte[])msg.obj;
+                if (rcvByte[0]==(byte)0xFE){
+                    float tem1= (float) ((((rcvByte[3] << 8) | rcvByte[2] & 0xff))/10.0);
+                    //Log.v("tag","tem1:"+tem1);
+                    float hum1=(float) ((((rcvByte[7] << 8) | rcvByte[6] & 0xff)));
+                    tempDashboardView.setRealTimeValue(tem1);
+                    humDashboardView.setRealTimeValue(hum1);
+                }
             }
             else if(msg.what == 3){
-                countTimeText.setText(((int)msg.obj)+" min");
+                countTimeText.setText(((int)msg.obj/60)+" min\n"+((int)msg.obj%60)+" sec");
             }
             else if(msg.what == 4){
-                countTimeText.setText("0 min");
-                circularProgressView.setProgress(100);
-                //byte[] sendBuf={0x29};
-                //MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                startImageButton.setEnabled(true);
+                countTimeText.setText("  0 \nsec");
+                circularProgressView.setProgress(0);
+                byte[] sendBuf={0x29};
+                MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                startButton.setText("开始");
             }else if (msg.what == 5){
 //                dateTextView.setText((String)msg.obj);
             }

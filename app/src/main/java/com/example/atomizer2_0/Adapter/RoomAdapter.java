@@ -1,6 +1,7 @@
 package com.example.atomizer2_0.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -73,6 +74,7 @@ public class RoomAdapter extends ArrayAdapter<RoomData> {
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id){
                 TextView tv = (TextView)view;
                 tv.setTextSize(23.0f);    //设置大小
+                tv.setTextColor(Color.parseColor("#EEEEEE"));
 
                 if (i==0){
                     templateRoomData.get(position).setMode("广谱消毒");
