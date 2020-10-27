@@ -43,7 +43,7 @@ import static com.example.atomizer2_0.ui.main.QuickDisinfectionFragment.quickHan
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     public static List<RoomData> templateRoomData = new ArrayList<RoomData>();
     public static List<RoomData> historyData = new ArrayList<RoomData>();
-    public static RoomData nowRoomData=new RoomData("快速消毒","null","请编辑任务",0,0,0);
+    public static RoomData nowRoomData=new RoomData("快速消毒"," ","请编辑任务",0,0,0);
     public static SharedPreferenceUtil sharedPreferenceUtil=new SharedPreferenceUtil();//对象存储
     public static int nowFragmentId;
     public static int lastFragmentId;
@@ -85,14 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        historyData.add(new RoomData("快速消毒","李","房间1",20,20,20));
 //        historyData.add(new RoomData("快速消毒","李","房间1",20,20,20));
         if(sharedPreferenceUtil.readObject(this,"templateRoomData")==null){
-            templateRoomData.add(new RoomData("广谱消毒","null","房间1",20,7,50));
+            templateRoomData.add(new RoomData("广谱消毒"," ","房间1",20,7,50));
             sharedPreferenceUtil.writeObject(this,"templateRoomData",templateRoomData);
             Log.e("tag","read null");
         }else{
             templateRoomData=(List<RoomData>)sharedPreferenceUtil.readObject(this,"templateRoomData");
         }
         if(sharedPreferenceUtil.readObject(this,"HistoryList")==null){
-            historyData.add(new RoomData("快速消毒","null","房间1",20,7,50));
+            historyData.add(new RoomData("快速消毒"," ","房间1",20,7,50));
             sharedPreferenceUtil.writeObject(this,"HistoryList",historyData);
             Log.e("tag","read null");
         }else{

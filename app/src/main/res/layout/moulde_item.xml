@@ -139,6 +139,76 @@
             </TextView>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="450dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="normal"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:text="空间长度:" />
+            <EditText
+                android:id="@+id/editRoomHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:inputType="number"
+                android:ems="9">
+            </EditText>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:text="   m"
+                >
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:typeface="normal"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:text="空间宽度:" />
+            <EditText
+                android:id="@+id/editRoomWidth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:inputType="number"
+                android:ems="10">
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="23dp"
+                android:textColor="#EEEEEE"
+                android:layout_gravity="center"
+                android:text="  m">
+
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

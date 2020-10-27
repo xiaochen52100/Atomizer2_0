@@ -7,7 +7,90 @@
     android:orientation="vertical"
     android:background="@drawable/shape_corner"
     android:id="@+id/more_history_fragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <SearchView
+            android:id="@+id/sv"
+            android:layout_width="500dp"
+            android:layout_height="40dp"
+            android:textSize="25sp"
+            android:textColor="#EEEEEE"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
+        </TextView>
+        <Spinner
+            android:id="@+id/rankSpinner"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#EEEEEE"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="bottom"
+            android:entries="@array/rank">
+
+        </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#EEEEEE"
+            android:layout_gravity="center"
+            android:text="筛选："
+            android:layout_marginLeft="20dp">
+
+        </TextView>
+        <Spinner
+            android:id="@+id/modeSpinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#EEEEEE"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="bottom"
+            android:entries="@array/mode"/>
+
+        <Spinner
+            android:id="@+id/roomSpinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#EEEEEE"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="bottom"
+            android:entries="@array/mode"/>
+
+        <Spinner
+            android:id="@+id/dateSpinner"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="#EEEEEE"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="bottom"/>
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textSize="16sp"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center">
+
+        </Button>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -81,7 +164,7 @@
     <ListView
         android:id="@+id/moreHistoryList"
         android:layout_width="wrap_content"
-        android:layout_height="310dp"
+        android:layout_height="300dp"
         android:layout_marginTop="10dp"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="52dp" />

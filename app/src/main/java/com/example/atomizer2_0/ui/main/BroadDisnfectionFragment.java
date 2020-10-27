@@ -29,6 +29,9 @@ import com.example.atomizer2_0.DashboardView;
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.example.atomizer2_0.MainActivity.barDate;
 import static com.example.atomizer2_0.MainActivity.historyData;
 import static com.example.atomizer2_0.MainActivity.nowRoomData;
@@ -128,7 +131,7 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
         switch (view.getId()){
             case R.id.buttonParameter:
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, TemplateFragment.newInstance())
+                        .replace(R.id.container, TemplateFragment2.newInstance())
                         .commitNow();
                 Log.e("tag","buttonParameter");
                 break;
@@ -138,8 +141,18 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
                     if (nowRoomData.getRoomName().equals("未选择任务")){
                         Toast.makeText(getContext(), "请先选择任务", Toast.LENGTH_LONG).show();
                     }else{
-                        byte[] sendBuf={0x25};
-                        MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                        startButton.setEnabled(false);
+                        TimerTask task = new TimerTask(){
+                            public void run(){
+                                Message msg1 = new Message();
+                                msg1.what = 8;
+                                broadHandler.sendMessage(msg1);
+                            }
+                        };
+                        Timer timer = new Timer();
+                        timer.schedule(task,5000);
+                        //byte[] sendBuf={0x25};
+                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
                         nowRoomData.setTaskData(barDate.getText().toString());
                         if(historyData.size()<100){
                             historyData.add(nowRoomData);
@@ -156,9 +169,19 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
                     }
 
                     }else if(MainActivity.state){
-                        byte[] sendBuf={0x29};
-                        MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                        countTimeText.setText("  0 \nsec");
+                        startButton.setEnabled(false);
+                        TimerTask task = new TimerTask(){
+                            public void run(){
+                                Message msg1 = new Message();
+                                msg1.what = 8;
+                                broadHandler.sendMessage(msg1);
+                            }
+                        };
+                        Timer timer = new Timer();
+                        timer.schedule(task,5000);
+                        //byte[] sendBuf={0x29};
+                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                        countTimeText.setText("00:00");
                         circularProgressView.setProgress(0);
                         MainActivity.Countdown=System.currentTimeMillis();
                         startButton.setText("开始");
@@ -173,7 +196,7 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
                 break;
             case R.id.homeButton:
                 if (MainActivity.state){
-                    Toast.makeText(getContext(), "任务进行中不可退出", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "任务进行中不可退出", Toast.LENGTH_LONG).show();
                 }else {
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.container, MainFragment.newInstance())
@@ -199,19 +222,21 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
                 }
             }
             else if(msg.what == 3){
-                countTimeText.setText(((int)msg.obj/60)+" min\n"+((int)msg.obj%60)+" sec");
+                countTimeText.setText(((int)msg.obj/60)+":"+((int)msg.obj%60)+"");
             }
             else if(msg.what == 4){
-                countTimeText.setText("  0 \nsec");
+                countTimeText.setText("00:00");
                 circularProgressView.setProgress(0);
-                byte[] sendBuf={0x29};
-                MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                //byte[] sendBuf={0x29};
+                //MainActivity.serialPortThread.sendSerialPort(sendBuf);
             }else if (msg.what == 5){
                 //dateTextView.setText((String)msg.obj);
             }else if(msg.what == 6){
                 tempDashboardView.setRealTimeValue((float)msg.obj);
             }else if(msg.what == 7){
                 humDashboardView.setRealTimeValue((float)msg.obj);
+            }else if (msg.what == 8){
+                startButton.setEnabled(true);
             }
 
         }

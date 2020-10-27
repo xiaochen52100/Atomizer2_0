@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    >
+<!--    <CheckBox-->
+<!--        android:id="@+id/checkbox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:theme="@style/MyCheckBox"-->
+<!--        android:layout_marginLeft="10dp">-->
+
+<!--    </CheckBox>-->
+
+    <TextView
+        android:id="@+id/modeTextView"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textColor="#EEEEEE"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textColor="#EEEEEE"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/principalTextView"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textColor="#EEEEEE"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textColor="#EEEEEE"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="23sp"
+        android:textColor="#EEEEEE"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="TextView" />
+
+</LinearLayout>

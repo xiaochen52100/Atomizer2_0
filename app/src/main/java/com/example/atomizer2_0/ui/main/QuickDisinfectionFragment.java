@@ -30,6 +30,9 @@ import com.example.atomizer2_0.DashboardView;
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static com.example.atomizer2_0.MainActivity.barDate;
 import static com.example.atomizer2_0.MainActivity.historyData;
 import static com.example.atomizer2_0.MainActivity.nowRoomData;
@@ -95,7 +98,10 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         seekBarRoomTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+                nowRoomData.setRoomProcess(seekBar.getProgress());
+                int time= (int) ((seekBar.getProgress()/100.0)*60);
+                editTextTime.setText(time+"");
+                nowRoomData.setRoomTime(time);
             }
 
             @Override
@@ -172,14 +178,24 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.startButton:
+                startButton.setEnabled(false);
+                TimerTask task = new TimerTask(){
+                    public void run(){
+                        Message msg1 = new Message();
+                        msg1.what = 6;
+                        quickHandler.sendMessage(msg1);
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(task,5000);
                 nowRoomData.setMode("快速消毒");
                 nowRoomData.setRoomTime(Integer.parseInt(editTextTime.getText().toString()));
                 if (!MainActivity.state&&nowRoomData.getRoomTime()>0){
 //                    if (nowRoomData.getRoomName().equals("未选择任务")){
 //                        Toast.makeText(getContext(), "请先选择任务", Toast.LENGTH_LONG).show();
 //                    }else{
-                        byte[] sendBuf={0x25};
-                        MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                        //byte[] sendBuf={0x25};
+                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
                         nowRoomData.setTaskData(barDate.getText().toString());
                         nowRoomData.setPrincipal("null");
                         if(historyData.size()<100){
@@ -197,9 +213,9 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
                         Toast.makeText(getContext(), "开启任务", Toast.LENGTH_LONG).show();
 //                    }
                 }else if(MainActivity.state){
-                    byte[] sendBuf={0x29};
-                    MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                    countTimeText.setText("  0 \nsec");
+                    //byte[] sendBuf={0x29};
+                    //MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                    countTimeText.setText("00:00");
                     circularProgressView.setProgress(0);
                     MainActivity.Countdown=System.currentTimeMillis();
                     startButton.setText("开始");
@@ -210,7 +226,7 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
                 break;
             case R.id.homeButton:
                 if (MainActivity.state){
-                    Toast.makeText(getContext(), "任务进行中不可退出", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "任务进行中不可退出", Toast.LENGTH_LONG).show();
                 }else {
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.container, MainFragment.newInstance())
@@ -238,16 +254,18 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
                 }
             }
             else if(msg.what == 3){
-                countTimeText.setText(((int)msg.obj/60)+" min\n"+((int)msg.obj%60)+" sec");
+                countTimeText.setText(((int)msg.obj/60)+":"+((int)msg.obj%60)+"");
             }
             else if(msg.what == 4){
-                countTimeText.setText("  0 \nsec");
+                countTimeText.setText("00:00");
                 circularProgressView.setProgress(0);
-                byte[] sendBuf={0x29};
-                MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                //byte[] sendBuf={0x29};
+                //MainActivity.serialPortThread.sendSerialPort(sendBuf);
                 startButton.setText("开始");
             }else if (msg.what == 5){
 //                dateTextView.setText((String)msg.obj);
+            }else if (msg.what == 6){
+                startButton.setEnabled(true);
             }
 
         }
