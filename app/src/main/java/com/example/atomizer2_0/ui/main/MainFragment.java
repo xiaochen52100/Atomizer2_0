@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
@@ -21,7 +22,7 @@ import static com.example.atomizer2_0.MainActivity.barButton;
 public class MainFragment extends Fragment implements View.OnClickListener{
 
     private MainViewModel mViewModel;
-    private Button buttonQuick,buttonBroad,buttonProfession,buttonSetting;
+    private LinearLayout buttonQuick,buttonBroad,buttonProfession,buttonSetting;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -31,7 +32,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root= inflater.inflate(R.layout.main_fragment, container, false);
+        View root= inflater.inflate(R.layout.main_fragment2, container, false);
         buttonQuick=root.findViewById(R.id.buttonQuick);
         buttonBroad=root.findViewById(R.id.buttonBroad);
         buttonProfession=root.findViewById(R.id.buttonProfession);
@@ -80,7 +81,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             case R.id.buttonSetting:
 //                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, GenericFragment.newInstance())
+                        .replace(R.id.container, GenericFragment2.newInstance())
                         .commitNow();
 //                MainActivity.checkList.clear();
 //                for (int i=0;i<MainActivity.historyData.size();i++){

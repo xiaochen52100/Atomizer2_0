@@ -3,6 +3,7 @@ package com.example.atomizer2_0;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static SharedPreferenceUtil sharedPreferenceUtil=new SharedPreferenceUtil();//对象存储
     public static int nowFragmentId;
     public static int lastFragmentId;
-    public static ImageButton barButton;
+    public static ImageView barButton;
     public static TextView barTitle;
     private LinearLayout barLayout;
     public static boolean runFlag=false;
@@ -63,12 +65,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         hideBottomUIMenu();
+        getWindow().setFormat(PixelFormat.RGBA_8888);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main_activity);
 
         barButton=findViewById(R.id.barButton);
-        barButton.setVisibility(View.INVISIBLE);
+//        barButton.setVisibility(View.INVISIBLE);
         barLayout=findViewById(R.id.barLayout);
         barDate=findViewById(R.id.barDate);
 //        barTitle=findViewById(R.id.barTitle);
