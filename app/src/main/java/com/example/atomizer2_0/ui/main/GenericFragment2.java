@@ -1,7 +1,10 @@
 package com.example.atomizer2_0.ui.main;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,6 +29,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.atomizer2_0.Adapter.CustomDialog;
 import com.example.atomizer2_0.Adapter.MoreHistoryAdapter;
 import com.example.atomizer2_0.Adapter.RoomData;
 import com.example.atomizer2_0.MainActivity;
@@ -42,7 +46,6 @@ public class GenericFragment2 extends Fragment implements View.OnClickListener{
     private Button historyButton,settingButton,afterSaleButton,descriptionButton,remoteButton,parameterButton;
     private LinearLayout homeButton;
     private Fragment contactFragment;
-    private MoreHistoryFragment moreHistoryFragment;
     private DescriptionFragment descriptionFragment;
     private SystemSettingFragment systemSettingFragment;
     private LinearLayout linearLayout;
@@ -134,7 +137,7 @@ public class GenericFragment2 extends Fragment implements View.OnClickListener{
         //viewButton=root.findViewById(R.id.viewButton);
         historyDataFilter.clear();
         historyDataFilter=historyData;
-        moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyDataFilter);
+        moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyDataFilter,genericHandler);
         moreHistoryList.setAdapter(moreHistoryAdapter);
         flag=false;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -152,7 +155,7 @@ public class GenericFragment2 extends Fragment implements View.OnClickListener{
                 //如果newText不是长度为0的字符串
                 if (TextUtils.isEmpty(newText)) {
                     //清除ListView的过滤
-                    moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyData);
+                    moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyData,genericHandler);
                     moreHistoryList.setAdapter(moreHistoryAdapter);
                     flag=false;
                 } else {
@@ -204,7 +207,7 @@ public class GenericFragment2 extends Fragment implements View.OnClickListener{
                         }
                     }
                     Log.e("tag","historyDataFilter:"+historyDataFilter.size());
-                    moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyDataFilter);
+                    moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item,historyData,genericHandler);
                     moreHistoryList.setAdapter(moreHistoryAdapter);
                     flag=false;
                 }
@@ -421,7 +424,7 @@ public class GenericFragment2 extends Fragment implements View.OnClickListener{
                     historyDataFilter2=historyDataFilter;
                 }
 
-                moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyDataFilter2);
+                moreHistoryAdapter=new MoreHistoryAdapter(getContext(),R.layout.more_history_item, historyDataFilter2,genericHandler);
                 moreHistoryList.setAdapter(moreHistoryAdapter);
                 flag=true;
             }
@@ -553,4 +556,34 @@ public class GenericFragment2 extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+    public Handler genericHandler  = new Handler(){
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if(msg.what == 1){
+                RoomData roomData=(RoomData)msg.obj;
+                CustomDialog.Builder builder = new CustomDialog.Builder(getContext());
+                builder.setMessage("消毒模式："+roomData.getMode()+"    负责人："+roomData.getPrincipal()+"   空间体积："+roomData.getRoomArea()+"\n"+
+                        "消毒时间："+roomData.getTaskData()+"   消毒时长:"+roomData.getRoomTime());
+                builder.setTitleText("任务名称："+roomData.getRoomName());
+                builder.setPositiveButton("打印", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        //设置你的操作事项
+                        //Toast.makeText(MainActivity.this,"queding",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setNegativeButton("取消",
+                        new android.content.DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Toast.makeText(MainActivity.this,"queding",Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        });
+
+                builder.create().show();
+            }
+
+        }
+    };
 }

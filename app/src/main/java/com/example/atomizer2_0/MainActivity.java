@@ -15,7 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ import com.example.atomizer2_0.serial.SerialPortThread;
 import com.example.atomizer2_0.ui.main.BroadDisnfectionFragment;
 import com.example.atomizer2_0.ui.main.MainFragment;
 import com.example.atomizer2_0.ui.main.MainSettingFragment;
-import com.example.atomizer2_0.ui.main.MoreHistoryFragment;
 import com.example.atomizer2_0.ui.main.ProfessionDisnfectionFragment;
 import com.example.atomizer2_0.ui.main.TemplateFragment;
 
@@ -282,12 +280,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         barButton.setVisibility(View.INVISIBLE);
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, MainFragment.newInstance())
-                                .commitNow();
-                        break;
-                    case R.id.printf_history_fragment:
-                        barButton.setVisibility(View.INVISIBLE);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, MoreHistoryFragment.newInstance())
                                 .commitNow();
                         break;
 

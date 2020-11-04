@@ -1,25 +1,19 @@
 package com.example.atomizer2_0.Adapter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Filterable;
-import android.widget.RadioGroup;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
-import com.example.atomizer2_0.ui.main.MainFragment;
-import com.example.atomizer2_0.ui.main.MoreHistoryFragment;
+import com.example.atomizer2_0.ui.main.GenericFragment2;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MoreHistoryAdapter extends ArrayAdapter<RoomData> implements Filterable {
@@ -28,12 +22,14 @@ public class MoreHistoryAdapter extends ArrayAdapter<RoomData> implements Filter
     private TextView modeTextView,nameTextView,principalTextView,timeTextView,dateTextView;
     private TextView viewTextView;
     private int resourceId;
+    private Handler mhandler;
 
-    public MoreHistoryAdapter(Context context, int resource, List<RoomData> objects){
+    public MoreHistoryAdapter(Context context, int resource, List<RoomData> objects, Handler handler){
         super(context, resource,objects);
         this.mData=objects;
         this.mContext=context;
         this.resourceId=resource;
+        this.mhandler=handler;
 
     }
     @Override
@@ -44,7 +40,7 @@ public class MoreHistoryAdapter extends ArrayAdapter<RoomData> implements Filter
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        RoomData roomData=getItem(position);
+        final RoomData roomData=getItem(position);
         View view = LayoutInflater.from(getContext()).inflate(resourceId, null);
         modeTextView=view.findViewById(R.id.modeTextView);
         nameTextView=view.findViewById(R.id.nameTextView);
@@ -63,26 +59,14 @@ public class MoreHistoryAdapter extends ArrayAdapter<RoomData> implements Filter
             @Override
             public void onClick(View v) {
                 Log.e("tag",position+"");
+                Message msg = new Message();
+                msg.what=1;
+                msg.obj=roomData;
+                mhandler.sendMessage(msg);
+
             }
         });
 
-//        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-//                if(isChecked){
-//                    MainActivity.checkList.set(position,isChecked);
-//                }else{
-//                    MainActivity.checkList.set(position,isChecked);
-//                }
-//                for (int i = 0; i< MainActivity.checkList.size(); i++){
-//                    if (MainActivity.checkList.get(i)){
-//                        MainActivity.checkList.set(i,true);
-//                    }else {
-//                        MainActivity.checkList.set(i,false);
-//                    }
-//                }
-//            }
-//        });
         return view;
     }
 

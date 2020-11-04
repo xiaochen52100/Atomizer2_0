@@ -53,9 +53,6 @@ public class MainSettingFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.historyButton:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, MoreHistoryFragment.newInstance())
-                        .commitNow();
                 break;
             case R.id.settingButton:
                 break;

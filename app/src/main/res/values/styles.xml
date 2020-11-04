@@ -16,5 +16,13 @@
         <item name="colorControlNormal">@color/gray</item>
         <item name="colorControlActivated">@color/switch_btn_colors</item>
     </style>
+    <style name="Dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+
 
 </resources>
