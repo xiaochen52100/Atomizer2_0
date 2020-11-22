@@ -24,6 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.atomizer2_0.CircleProgress;
 import com.example.atomizer2_0.CircularProgressView;
 import com.example.atomizer2_0.DashboardView;
 import com.example.atomizer2_0.MainActivity;
@@ -54,8 +55,9 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
     private LinearLayout homeButton;
     private EditText roomArea,roomTime;
     protected static Button startButton;
-    protected static DashboardView tempDashboardView,humDashboardView;
+    protected static DashboardView tempDashboardView,humDashboardView,levelDashboard;
     private static CircularProgressView circularProgressView;
+    private static CircleProgress mCpLoading;
     public static BroadDisnfectionFragment newInstance() {
         return new BroadDisnfectionFragment();
     }
@@ -73,13 +75,26 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
         buttonParameter=root.findViewById(R.id.buttonParameter);
         principalEditText=root.findViewById(R.id.principalEditText);
         countTimeText=root.findViewById(R.id.countTimeText);
-        tempretureTextView=root.findViewById(R.id.tempretureTextView);
-        humidityTextView=root.findViewById(R.id.humidityTextView);
-        seekBarLevel=root.findViewById(R.id.seekBarLevel);
+//        tempretureTextView=root.findViewById(R.id.tempretureTextView);
+//        humidityTextView=root.findViewById(R.id.humidityTextView);
+//        seekBarLevel=root.findViewById(R.id.seekBarLevel);
         dateTextView=root.findViewById(R.id.dateTextView);
         circularProgressView=root.findViewById(R.id.circularProgressView);
         tempDashboardView=root.findViewById(R.id.dashboard_view_temp);
         humDashboardView=root.findViewById(R.id.dashboard_view_hum);
+//        levelDashboard=root.findViewById(R.id.dashboard_view_level);
+        mCpLoading = root.findViewById(R.id.cp_loading);
+        //mCpLoading.setProgress(100,5000);
+        mCpLoading.setProgress(60);
+        mCpLoading.setOnCircleProgressListener(new CircleProgress.OnCircleProgressListener() {
+            @Override
+            public boolean OnCircleProgress(int progress) {
+//                if(progress==100){
+//                    mCpLoading.setProgress(0);
+//                }
+                return false;
+            }
+        });
         homeButton=root.findViewById(R.id.homeButton);
         homeButton.setOnClickListener(this);
         buttonParameter.setOnClickListener(this);
@@ -217,8 +232,11 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
                     float tem1= (float) ((((rcvByte[3] << 8) | rcvByte[2] & 0xff))/10.0);
                     //Log.v("tag","tem1:"+tem1);
                     float hum1=(float) ((((rcvByte[7] << 8) | rcvByte[6] & 0xff)));
+                    float level=(float)rcvByte[10];
                     tempDashboardView.setRealTimeValue(tem1);
                     humDashboardView.setRealTimeValue(hum1);
+                    //levelDashboard.setRealTimeValue(level);
+                    mCpLoading.setProgress((int)level);
                 }
             }
             else if(msg.what == 3){

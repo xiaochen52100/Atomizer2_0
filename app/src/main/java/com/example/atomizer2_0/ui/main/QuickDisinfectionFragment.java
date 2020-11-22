@@ -25,10 +25,12 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.atomizer2_0.CircleProgress;
 import com.example.atomizer2_0.CircularProgressView;
 import com.example.atomizer2_0.DashboardView;
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
+import com.example.atomizer2_0.WaveView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,8 +52,10 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
     private SeekBar seekBarLevel;
     private boolean editListen=false;
     private LinearLayout homeButton;
-    protected static DashboardView tempDashboardView,humDashboardView;
+    private WaveView waveView;
+    protected static DashboardView tempDashboardView,humDashboardView,levelDashboard;
     private static CircularProgressView circularProgressView;
+    private static CircleProgress mCpLoading;
     public static QuickDisinfectionFragment newInstance() {
         return new QuickDisinfectionFragment();
     }
@@ -70,14 +74,34 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         editTextRoomName =root.findViewById(R.id.roomName);
         countTimeText=root.findViewById(R.id.countTimeText);
         circularProgressView=root.findViewById(R.id.circularProgressView);
-        tempretureTextView=root.findViewById(R.id.tempretureTextView);
-        humidityTextView=root.findViewById(R.id.humidityTextView);
-        seekBarLevel=root.findViewById(R.id.seekBarLevel);
+//        tempretureTextView=root.findViewById(R.id.tempretureTextView);
+//        humidityTextView=root.findViewById(R.id.humidityTextView);
+//        seekBarLevel=root.findViewById(R.id.seekBarLevel);
         dateTextView=root.findViewById(R.id.dateTextView);
         tempDashboardView=root.findViewById(R.id.dashboard_view_temp);
         humDashboardView=root.findViewById(R.id.dashboard_view_hum);
+//        levelDashboard=root.findViewById(R.id.dashboard_view_level);
         homeButton=root.findViewById(R.id.homeButton);
         homeButton.setOnClickListener(this);
+        mCpLoading = root.findViewById(R.id.cp_loading);
+        //mCpLoading.setProgress(100,5000);
+        mCpLoading.setProgress(60);
+        mCpLoading.setOnCircleProgressListener(new CircleProgress.OnCircleProgressListener() {
+            @Override
+            public boolean OnCircleProgress(int progress) {
+//                if(progress==100){
+//                    mCpLoading.setProgress(0);
+//                }
+                return false;
+            }
+        });
+//        waveView = (WaveView) root.findViewById(R.id.waveView);
+//        waveView.setMax(100);
+//        waveView.setMode(WaveView.MODE_CIRCLE);
+//        waveView.setWaveColor(Color.RED);
+//        waveView.setbgColor(Color.WHITE);
+//        waveView.setSpeed(WaveView.SPEED_SLOW);
+//        waveView.setProgress(50);
         editListen=false;
         editTextTime.setText(0+"");
         editTextRoomName.setText("快速任务");
@@ -249,8 +273,11 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
                     float tem1= (float) ((((rcvByte[3] << 8) | rcvByte[2] & 0xff))/10.0);
                     //Log.v("tag","tem1:"+tem1);
                     float hum1=(float) ((((rcvByte[7] << 8) | rcvByte[6] & 0xff)));
+                    float level=(float)rcvByte[10];
                     tempDashboardView.setRealTimeValue(tem1);
                     humDashboardView.setRealTimeValue(hum1);
+                    //levelDashboard.setRealTimeValue(level);
+                    mCpLoading.setProgress((int)level);
                 }
             }
             else if(msg.what == 3){

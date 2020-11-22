@@ -35,4 +35,10 @@
         </attr>
         <attr name="bgColor" format="color"/> <!--背景颜色-->
     </declare-styleable>
+    <declare-styleable name="WaveView">
+        <attr name="backgroudColor" format="color"></attr>
+        <attr name="progressColor" format="color"></attr>
+        <attr name="max" format="integer"></attr>
+        <attr name="progressWave" format="integer"></attr>
+    </declare-styleable>
 </resources>

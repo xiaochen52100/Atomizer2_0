@@ -196,8 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     byte[] sendBuf={0x29};
                     serialPortThread.sendSerialPort(sendBuf);
                     state=false;
-                }
-                else{
+                }else{
                     double progess=((double) (Countdown-currentTime))/(double)(nowRoomData.getRoomTime()*60*1000);
                     //Log.v("tag","progess:"+progess+"  "+(Countdown-currentTime)+"  "+(nowRoomData.getRoomTime()*60*1000));
                     Message msg = new Message();
@@ -231,6 +230,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     byte[] sendBuf={0x25};
                     serialPortThread.sendSerialPort(sendBuf);
                 }
+
+            }
+            else{
+                byte[] sendBuf={0x29};
+                serialPortThread.sendSerialPort(sendBuf);
             }
         }
     };

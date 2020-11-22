@@ -73,5 +73,5 @@
         android:textColor="#EEEEEE"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="打印" />
+        android:text="查看" />
 </LinearLayout>

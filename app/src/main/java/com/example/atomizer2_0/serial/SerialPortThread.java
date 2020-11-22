@@ -4,12 +4,15 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.example.atomizer2_0.MainActivity;
+import com.example.atomizer2_0.R;
 import com.example.x6.serialportlib.SerialPort;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.example.atomizer2_0.MainActivity.nowRoomData;
 import static com.example.atomizer2_0.ui.main.BroadDisnfectionFragment.broadHandler;
 import static com.example.atomizer2_0.ui.main.ProfessionDisnfectionFragment.professionHandler;
 import static com.example.atomizer2_0.ui.main.QuickDisinfectionFragment.quickHandler;
@@ -43,10 +46,10 @@ public class SerialPortThread {
                         if (serialPort != null) {
                             byte[] recvBytes = serialPort.receiveData(true);
                             if (recvBytes != null && recvBytes.length > 0) {
-//                                Log.i("tag", "recvBytes === " + SerialPort.bytesToHexString(recvBytes, recvBytes.length));
-//                                Message msg = new Message();
-//                                msg.what = 2;
-//                                msg.obj=recvBytes;
+                                Log.i("tag", "recvBytes === " + SerialPort.bytesToHexString(recvBytes, recvBytes.length));
+                                Message msg = new Message();
+                                msg.what = 2;
+                                msg.obj=recvBytes;
 //                                if (quickHandler!=null){
 //                                    quickHandler.sendMessage(msg);
 //
@@ -55,7 +58,18 @@ public class SerialPortThread {
 //
 //                                }else if(professionHandler!=null){
 //                                    professionHandler.sendMessage(msg);
-//                                }
+//                                }MainActivity.nowFragmentId
+                                if (MainActivity.nowFragmentId== R.id.quick_disinfection_fragment){
+                                    if (quickHandler!=null) {
+                                        quickHandler.sendMessage(msg);
+                                    }
+
+                                }else if(MainActivity.nowFragmentId==R.id.broad_disinfection_fragment){
+                                    broadHandler.sendMessage(msg);
+
+                                }else if(MainActivity.nowFragmentId==R.id.profession_disinfection_fragment){
+                                    professionHandler.sendMessage(msg);
+                                }
 
                             }
                         }
@@ -86,6 +100,7 @@ public class SerialPortThread {
     public void sendSerialPort(byte[] sendBuff){
         if (serialPort != null && serialPort.isOpen) {
             serialPort.sendData(sendBuff);
+            Log.i("tag",sendBuff+"");
         }
     }
 }

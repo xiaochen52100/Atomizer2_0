@@ -8,28 +8,28 @@
     android:background="#062333"
     tools:ignore="MissingDefaultResource">
 
-    <com.example.atomizer2_0.DashboardView
-        android:id="@+id/dashboard_view_level2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
-        android:layout_marginLeft="175dp"
-        android:layout_marginBottom="150dp"
-        app:arcColor="#EEEEEE"
-        app:bigSliceCount="4"
-        app:headerRadius="40dp"
-        app:headerTitle="液位"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:maxValue="4"
-        app:measureTextSize="12sp"
-        app:minValue="0"
-        app:radius="80dp"
-        app:realTimeTextSize="23sp"
-        app:realTimeValue="3"
-        app:startAngle="210"
-        app:stripeWidth="30dp"
-        app:sweepAngle="120" />
+<!--    <com.example.atomizer2_0.DashboardView-->
+<!--        android:id="@+id/dashboard_view_level"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="175dp"-->
+<!--        android:layout_marginLeft="175dp"-->
+<!--        android:layout_marginBottom="150dp"-->
+<!--        app:arcColor="#EEEEEE"-->
+<!--        app:bigSliceCount="4"-->
+<!--        app:headerRadius="40dp"-->
+<!--        app:headerTitle="液位"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:maxValue="100"-->
+<!--        app:measureTextSize="12sp"-->
+<!--        app:minValue="0"-->
+<!--        app:radius="80dp"-->
+<!--        app:realTimeTextSize="23sp"-->
+<!--        app:realTimeValue="3"-->
+<!--        app:startAngle="210"-->
+<!--        app:stripeWidth="30dp"-->
+<!--        app:sweepAngle="120" />-->
 
     <Button
         android:id="@+id/buttonParameter"
@@ -340,7 +340,7 @@
         app:maxValue="120"
         app:measureTextSize="12sp"
         app:realTimeTextSize="23sp"
-        app:minValue="-50"
+        app:minValue="0"
         app:arcColor="#FF0033"
         app:radius="110dp"
         app:realTimeValue="26"
@@ -364,6 +364,23 @@
             android:text="00:00"
             android:textColor="#ffffff"
             android:textSize="35sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginLeft="94dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.atomizer2_0.CircleProgress
+            android:id="@+id/cp_loading"
+            android:layout_width="300dp"
+            android:layout_height="300dp">
+
+        </com.example.atomizer2_0.CircleProgress>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
