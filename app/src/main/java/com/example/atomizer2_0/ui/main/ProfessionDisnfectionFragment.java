@@ -72,10 +72,12 @@ public class ProfessionDisnfectionFragment extends Fragment implements View.OnCl
         circularProgressView=root.findViewById(R.id.circularProgressView);
         tempDashboardView=root.findViewById(R.id.dashboard_view_temp);
         humDashboardView=root.findViewById(R.id.dashboard_view_hum);
+        tempDashboardView.setValueType(1);
+        humDashboardView.setValueType(2);
 //        levelDashboard=root.findViewById(R.id.dashboard_view_level);
         mCpLoading = root.findViewById(R.id.cp_loading);
         //mCpLoading.setProgress(100,5000);
-        mCpLoading.setProgress(60);
+        mCpLoading.setProgress(90);
         mCpLoading.setOnCircleProgressListener(new CircleProgress.OnCircleProgressListener() {
             @Override
             public boolean OnCircleProgress(int progress) {
@@ -103,7 +105,8 @@ public class ProfessionDisnfectionFragment extends Fragment implements View.OnCl
             roomArea.setText(0+"");
             roomTime.setText(0+"");
         }
-
+        View timeView=(root).findViewById(R.id.timeView);
+        timeView.bringToFront();
         return root;
     }
 

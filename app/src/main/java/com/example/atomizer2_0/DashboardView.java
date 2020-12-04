@@ -73,6 +73,8 @@ public class DashboardView extends View {
     private MyHandler mHandler;
     private long duration = 500; // 动画默认时长
 
+    private int valueType=0;//1:温度；2:湿度
+
     public DashboardView(Context context) {
         this(context, null);
     }
@@ -112,6 +114,9 @@ public class DashboardView extends View {
 
         initObjects();
         initSizes();
+    }
+    public void setValueType(int type){
+        valueType=type;
     }
 
     private String[] getMeasureNumbers() {
@@ -441,8 +446,17 @@ public class DashboardView extends View {
         canvas.drawCircle(mCenterX, mCenterY, mCircleRadius + dpToPx(2), mPaintPointer);
 
         // 绘制读数
-        canvas.drawText(trimFloat(mRealTimeValue), mCenterX,
-                mCenterY + mCircleRadius + dpToPx(2) + dpToPx(25), mPaintValue);
+        if (valueType==1){//温度
+            canvas.drawText(String .format("%.1f",mRealTimeValue)+" ℃", mCenterX,
+                    mCenterY + mCircleRadius + dpToPx(2) + dpToPx(40), mPaintValue);
+        }else if (valueType==2){//湿度
+            canvas.drawText(String .format("%.1f",mRealTimeValue)+" ％", mCenterX,
+                    mCenterY + mCircleRadius + dpToPx(2) + dpToPx(40), mPaintValue);
+        }else{
+            canvas.drawText(String .format("%.1f",mRealTimeValue), mCenterX,
+                    mCenterY + mCircleRadius + dpToPx(2) + dpToPx(40), mPaintValue);
+        }
+
     }
 
     /**

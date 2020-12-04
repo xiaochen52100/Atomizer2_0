@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textColor="#EEEEEE"
-        android:paddingLeft="30dp"
+        android:paddingLeft="40dp"
         android:paddingRight="30dp"
         android:text="TextView" />
 

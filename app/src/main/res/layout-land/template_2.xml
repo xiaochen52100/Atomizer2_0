@@ -113,7 +113,9 @@
                         android:textColor="#EEEEEE"
                         android:layout_gravity="bottom"
                         android:ems="10"
-                        android:text="手术室1" />
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:text="房间1" />
 
                 </LinearLayout>
 
@@ -144,6 +146,7 @@
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
                         android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:ems="9">
                     </EditText>
                     <TextView
@@ -175,6 +178,7 @@
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
                         android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:ems="10">
                     </EditText>
 
@@ -216,6 +220,7 @@
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
                         android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:ems="5">
                     </EditText>
                     <TextView
@@ -224,7 +229,16 @@
                         android:layout_marginLeft="20dp"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:text="  m  ×"
+                        android:text="  m"
+                        >
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:textSize="23dp"
+                        android:textColor="#EEEEEE"
+                        android:text="×"
                         >
                     </TextView>
                     <EditText
@@ -235,25 +249,36 @@
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
                         android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:ems="5">
                     </EditText>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="40dp"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:text="  m ×"
+                        android:text="  m"
+                        >
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="40dp"
+                        android:textSize="23dp"
+                        android:textColor="#EEEEEE"
+                        android:text="×"
                         >
                     </TextView>
                     <EditText
                         android:id="@+id/editRoomHeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="40dp"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
                         android:inputType="number"
+                        android:imeOptions="actionDone"
                         android:ems="5">
                     </EditText>
                     <TextView

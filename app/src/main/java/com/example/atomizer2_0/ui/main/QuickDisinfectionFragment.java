@@ -80,12 +80,14 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         dateTextView=root.findViewById(R.id.dateTextView);
         tempDashboardView=root.findViewById(R.id.dashboard_view_temp);
         humDashboardView=root.findViewById(R.id.dashboard_view_hum);
+        tempDashboardView.setValueType(1);
+        humDashboardView.setValueType(2);
 //        levelDashboard=root.findViewById(R.id.dashboard_view_level);
         homeButton=root.findViewById(R.id.homeButton);
         homeButton.setOnClickListener(this);
         mCpLoading = root.findViewById(R.id.cp_loading);
         //mCpLoading.setProgress(100,5000);
-        mCpLoading.setProgress(60);
+        mCpLoading.setProgress(90);
         mCpLoading.setOnCircleProgressListener(new CircleProgress.OnCircleProgressListener() {
             @Override
             public boolean OnCircleProgress(int progress) {
@@ -109,6 +111,9 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
         seekListen();
         editTextListen();
         startButton.setOnClickListener(this);
+
+        View timeView=(root).findViewById(R.id.timeView);
+        timeView.bringToFront();
         return root;
     }
 

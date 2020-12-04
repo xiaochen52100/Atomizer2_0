@@ -88,7 +88,13 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
         confirmBtn.setOnClickListener(this);
         useLwhBtn.setOnClickListener(this);
         if (roomDataTemplate==null){
-            roomDataTemplate=new RoomData("广谱消毒"," ","房间1",20,7,50);
+            if (MainActivity.lastFragmentId==R.id.broad_disinfection_fragment){
+                modeTextView.setText("广谱消毒");
+                roomDataTemplate=new RoomData("广谱消毒"," ","房间1",20,7,50);
+            }else if(MainActivity.lastFragmentId==R.id.profession_disinfection_fragment){
+                modeTextView.setText("专业消毒");
+                roomDataTemplate=new RoomData("专业消毒"," ","房间1",20,7,50);
+            }
         }
         if (roomDataTemplate!=null){
             roomName.setText(roomDataTemplate.getRoomName());
@@ -97,8 +103,10 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
             editRoomTime.setText(roomDataTemplate.getRoomTime()+"");
             if (MainActivity.lastFragmentId==R.id.broad_disinfection_fragment){
                 modeTextView.setText("广谱消毒");
+                roomDataTemplate.setMode("广谱消毒");
             }else if(MainActivity.lastFragmentId==R.id.profession_disinfection_fragment){
                 modeTextView.setText("专业消毒");
+                roomDataTemplate.setMode("专业消毒");
             }
         }
 //        homeButton=root.findViewById(R.id.homeButton);
@@ -223,6 +231,7 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                 double timeDouble=((seekBar.getProgress()-50)/100.00)*(roomTimes)+(roomTimes);
                 int time=(int)timeDouble;
                 editRoomTime.setText(time+"");
+                roomDataTemplate.setRoomTime(time);
 //                templateRoomData.get(position).setRoomTime(time);
 //                templateRoomData.get(position).setRoomProcess(seekBar.getProgress());
 //                MainActivity.sharedPreferenceUtil.writeObject(getContext(),"templateRoomData",templateRoomData);
@@ -363,6 +372,9 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
 
             @Override
             public void afterTextChanged(Editable editable) {
+                if (!roomName.getText().toString().equals("")){
+                    roomDataTemplate.setRoomName(roomName.getText().toString());
+                }
 
                 //templateRoomData.get(position).setRoomName(roomName.getText().toString());
                 //MainActivity.sharedPreferenceUtil.writeObject(getContext(),"templateRoomData",templateRoomData);
@@ -398,6 +410,8 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                     }
                     seekBarRoomTime.setProgress(50);
                     editRoomTime.setText(roomTimes+"");
+                    roomDataTemplate.setRoomTime(roomTimes);
+                    roomDataTemplate.setRoomArea(roomAreas);
 
                 }
 
@@ -435,8 +449,10 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
 
                 if (MainActivity.lastFragmentId==R.id.broad_disinfection_fragment){
                     modeTextView.setText("广谱消毒");
+                    roomDataTemplate.setMode("广谱消毒");
                 }else if(MainActivity.lastFragmentId==R.id.profession_disinfection_fragment){
                     modeTextView.setText("专业消毒");
+                    roomDataTemplate.setMode("专业消毒");
                 }
 
                 break;
@@ -457,6 +473,20 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                         .commitNow();
                 break;
             case R.id.confirmBtn:
+//                nowRoomData=roomDataTemplate;
+//                if (MainActivity.lastFragmentId==R.id.broad_disinfection_fragment){
+//                    //nowRoomData.setMode("广谱消毒");
+//                    Log.e("TAG","time  "+nowRoomData.getRoomTime());
+//                    getActivity().getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.container, BroadDisnfectionFragment.newInstance())
+//                            .commitNow();
+//                }else if(MainActivity.lastFragmentId==R.id.profession_disinfection_fragment){
+//                    //nowRoomData.setMode("专业消毒");
+//                    Log.e("TAG","time  "+nowRoomData.getRoomTime());
+//                    getActivity().getSupportFragmentManager().beginTransaction()
+//                            .replace(R.id.container, ProfessionDisnfectionFragment.newInstance())
+//                            .commitNow();
+//                }
                 nowRoomData=roomDataTemplate;
                 if (roomDataTemplate.getMode().equals("广谱消毒")){
                     getActivity().getSupportFragmentManager().beginTransaction()
@@ -500,6 +530,7 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                                 seekBarRoomTime.setProgress(50);
                                 editRoomTime.setText(roomTimes+"");
                                 roomArea.setText(roomAreas+"");
+                                roomDataTemplate.setRoomTime(roomTimes);
                             }
                         }
                     }

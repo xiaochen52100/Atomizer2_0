@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static Timer timerTask ,dateTaskTimer;
     public static int mode;
     public static TextView barDate;
+    public static TextView modeText;
     public static List<Boolean> checkList=new ArrayList<Boolean>();
     public static SerialPortThread serialPortThread;
 
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        barButton.setVisibility(View.INVISIBLE);
         barLayout=findViewById(R.id.barLayout);
         barDate=findViewById(R.id.barDate);
+        modeText=findViewById(R.id.modeText);
+        modeText.setVisibility(View.GONE);
 //        barTitle=findViewById(R.id.barTitle);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

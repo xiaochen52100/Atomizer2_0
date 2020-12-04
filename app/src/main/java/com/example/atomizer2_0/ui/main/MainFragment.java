@@ -18,6 +18,7 @@ import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 
 import static com.example.atomizer2_0.MainActivity.barButton;
+import static com.example.atomizer2_0.MainActivity.modeText;
 
 public class MainFragment extends Fragment implements View.OnClickListener{
 
@@ -43,6 +44,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         buttonSetting.setOnClickListener(this);
         MainActivity.nowFragmentId=R.id.main;
         MainActivity.lastFragmentId=R.id.main;
+        modeText.setVisibility(View.GONE);
 //        MainActivity.barTitle.setText("主界面");
 //        barButton.setImageResource(R.mipmap.arrow_bold_left_128);
 
@@ -62,23 +64,31 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()){
             case R.id.buttonQuick:
 //                barButton.setVisibility(View.VISIBLE);
+                modeText.setVisibility(View.VISIBLE);
+                modeText.setText("当前：快速消毒");
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, QuickDisinfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonBroad:
  //               barButton.setVisibility(View.VISIBLE);
+                modeText.setVisibility(View.VISIBLE);
+                modeText.setText("当前：广谱消毒");
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, BroadDisnfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonProfession:
+                modeText.setVisibility(View.VISIBLE);
+                modeText.setText("当前：专业消毒");
 //                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, ProfessionDisnfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonSetting:
+                modeText.setVisibility(View.VISIBLE);
+                modeText.setText("当前：其它设置");
 //                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, GenericFragment2.newInstance())
