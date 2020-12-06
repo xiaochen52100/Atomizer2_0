@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:textColor="#ffffff"
-                android:text="当前："
+                android:text="当前模式："
                 android:textSize="22sp"
                 android:layout_gravity="center"
                 >

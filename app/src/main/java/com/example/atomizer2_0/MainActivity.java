@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static TextView modeText;
     public static List<Boolean> checkList=new ArrayList<Boolean>();
     public static SerialPortThread serialPortThread;
+    public static TextToSpeech textToSpeech = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +115,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         serialPortThread=new SerialPortThread();
         serialPortThread.openSerialPort();
+//        initTTS();
+//        //textToSpeech.setLanguage(Locale.CHINESE);
+//        //设置音调，值越大声音越尖（女生），值越小则变成男声,1.0是常规
+//        textToSpeech.setPitch(4f);
+//        //设置语速
+//        textToSpeech.setSpeechRate(3f);
+//        //输入中文，若不支持的设备则不会读出来
+//        textToSpeech.speak("测试",
+//                TextToSpeech.QUEUE_FLUSH, null);
 
     }
     @Override
@@ -241,6 +253,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     };
+    private void initTTS() {
+
+        //实例化自带语音对象
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == 0) {
+
+                    // Toast.makeText(MainActivity.this,"成功输出语音",
+                    // Toast.LENGTH_SHORT).show();
+                    // Locale loc1=new Locale("us");
+                    // Locale loc2=new Locale("china");
+
+                    textToSpeech.setPitch(1.0f);//方法用来控制音调
+                    textToSpeech.setSpeechRate(1.0f);//用来控制语速
+
+                    //判断是否支持下面两种语言
+                    //int result1 = textToSpeech.setLanguage(Locale.US);
+                    int result2 = textToSpeech.setLanguage(Locale.
+                            SIMPLIFIED_CHINESE);
+                    //boolean a = (result1 == TextToSpeech.LANG_MISSING_DATA || result1 == TextToSpeech.LANG_NOT_SUPPORTED);
+                    boolean b = (result2 == TextToSpeech.LANG_MISSING_DATA || result2 == TextToSpeech.LANG_NOT_SUPPORTED);
+
+                    //Log.i("zhh_tts", "US支持否？--》" + a +
+                    //        "\nzh-CN支持否》--》" + b);
+
+                } else {
+                    Toast.makeText(MainActivity.this, "数据丢失或不支持", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View view) {

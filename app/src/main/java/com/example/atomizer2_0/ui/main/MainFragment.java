@@ -65,7 +65,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             case R.id.buttonQuick:
 //                barButton.setVisibility(View.VISIBLE);
                 modeText.setVisibility(View.VISIBLE);
-                modeText.setText("当前：快速消毒");
+                modeText.setText("当前模式：快速消毒");
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, QuickDisinfectionFragment.newInstance())
                         .commitNow();
@@ -73,14 +73,14 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             case R.id.buttonBroad:
  //               barButton.setVisibility(View.VISIBLE);
                 modeText.setVisibility(View.VISIBLE);
-                modeText.setText("当前：广谱消毒");
+                modeText.setText("当前模式：广谱消毒");
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, BroadDisnfectionFragment.newInstance())
                         .commitNow();
                 break;
             case R.id.buttonProfession:
                 modeText.setVisibility(View.VISIBLE);
-                modeText.setText("当前：专业消毒");
+                modeText.setText("当前模式：专业消毒");
 //                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, ProfessionDisnfectionFragment.newInstance())
@@ -88,7 +88,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.buttonSetting:
                 modeText.setVisibility(View.VISIBLE);
-                modeText.setText("当前：其它设置");
+                modeText.setText("其它设置");
 //                barButton.setVisibility(View.VISIBLE);
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, GenericFragment2.newInstance())

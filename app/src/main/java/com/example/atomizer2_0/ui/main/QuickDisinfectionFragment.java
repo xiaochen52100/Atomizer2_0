@@ -2,8 +2,10 @@ package com.example.atomizer2_0.ui.main;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,6 +34,7 @@ import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 import com.example.atomizer2_0.WaveView;
 
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,6 +42,7 @@ import static com.example.atomizer2_0.MainActivity.barDate;
 import static com.example.atomizer2_0.MainActivity.historyData;
 import static com.example.atomizer2_0.MainActivity.nowRoomData;
 import static com.example.atomizer2_0.MainActivity.sharedPreferenceUtil;
+import static com.example.atomizer2_0.MainActivity.textToSpeech;
 
 public class QuickDisinfectionFragment extends Fragment implements View.OnClickListener{
     private QuickDisinfectionViewModel mQuickDisinfectionViewModel;
@@ -56,6 +60,9 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
     protected static DashboardView tempDashboardView,humDashboardView,levelDashboard;
     private static CircularProgressView circularProgressView;
     private static CircleProgress mCpLoading;
+    private boolean countFlag=false;
+    private CountDownTimer counttimer;
+
     public static QuickDisinfectionFragment newInstance() {
         return new QuickDisinfectionFragment();
     }
@@ -207,50 +214,58 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.startButton:
-                startButton.setEnabled(false);
-                TimerTask task = new TimerTask(){
-                    public void run(){
-                        Message msg1 = new Message();
-                        msg1.what = 6;
-                        quickHandler.sendMessage(msg1);
-                    }
-                };
-                Timer timer = new Timer();
-                timer.schedule(task,5000);
                 nowRoomData.setMode("快速消毒");
                 nowRoomData.setRoomTime(Integer.parseInt(editTextTime.getText().toString()));
-                if (!MainActivity.state&&nowRoomData.getRoomTime()>0){
-//                    if (nowRoomData.getRoomName().equals("未选择任务")){
-//                        Toast.makeText(getContext(), "请先选择任务", Toast.LENGTH_LONG).show();
-//                    }else{
-                        //byte[] sendBuf={0x25};
-                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                        nowRoomData.setTaskData(barDate.getText().toString());
-                        nowRoomData.setPrincipal("null");
-                        if(historyData.size()<100){
-                            historyData.add(nowRoomData);
-                        }else {
-                            historyData.remove(0);
-                            historyData.add(nowRoomData);
+                if (!MainActivity.state&&nowRoomData.getRoomTime()>0&&!countFlag){
+                    nowRoomData.setTaskData(barDate.getText().toString());
+                    nowRoomData.setPrincipal(" ");
+                    if(historyData.size()<100){
+                        historyData.add(nowRoomData);
+                    }else {
+                        historyData.remove(0);
+                        historyData.add(nowRoomData);
+                    }
+                    sharedPreferenceUtil.writeObject(getContext(),"HistoryList",historyData);
+                    countFlag=true;
+                    counttimer = new CountDownTimer(10000, 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            startButton.setText(((millisUntilFinished-1) / 1000)+"秒后开始");
+//                            Message msg1 = new Message();
+//                            msg1.what =7;
+//                            msg1.obj=(int)(millisUntilFinished-1) / 1000;
+//                            quickHandler.sendMessage(msg1);
+
                         }
-                        sharedPreferenceUtil.writeObject(getContext(),"HistoryList",historyData);
-                        long currentTime = System.currentTimeMillis();
-                        MainActivity.Countdown=currentTime+nowRoomData.getRoomTime()*60*1000;
-                        startButton.setText("停止");
-                        //startButton.setBackground(ResourcesCompat.getDrawable(getResources(), R.drawable.button_corner_red, null));
-                        MainActivity.state=true;
-                        Toast.makeText(getContext(), "开启任务", Toast.LENGTH_LONG).show();
-//                    }
-                }else if(MainActivity.state){
+
+                        @Override
+                        public void onFinish() {
+                            startButton.setText("停止");
+
+                            long currentTime = System.currentTimeMillis();
+                            MainActivity.Countdown=currentTime+nowRoomData.getRoomTime()*60*1000;
+                            MainActivity.state=true;
+                            Toast.makeText(getContext(), "开启任务", Toast.LENGTH_LONG).show();
+                            countFlag=false;
+                        }
+                    };
+                    counttimer.start();
+                }else if(MainActivity.state&&!countFlag){
                     //byte[] sendBuf={0x29};
                     //MainActivity.serialPortThread.sendSerialPort(sendBuf);
                     countTimeText.setText("00:00");
                     circularProgressView.setProgress(0);
                     MainActivity.Countdown=System.currentTimeMillis();
                     startButton.setText("开始");
-                    //startButton.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button_corner));
                     MainActivity.state=false;
                     Toast.makeText(getContext(), "关闭任务", Toast.LENGTH_LONG).show();
+                }else if(!MainActivity.state&&nowRoomData.getRoomTime()>0&&countFlag){
+                    if (counttimer!=null){
+                        counttimer.cancel();
+                        startButton.setText("开始");
+                        MainActivity.state=false;
+                        countFlag=false;
+                    }
                 }
                 break;
             case R.id.homeButton:
@@ -298,6 +313,15 @@ public class QuickDisinfectionFragment extends Fragment implements View.OnClickL
 //                dateTextView.setText((String)msg.obj);
             }else if (msg.what == 6){
                 startButton.setEnabled(true);
+            }else if(msg.what == 7){
+//                textToSpeech.setLanguage(Locale.CHINESE);
+//                //设置音调，值越大声音越尖（女生），值越小则变成男声,1.0是常规
+//                textToSpeech.setPitch(4f);
+//                //设置语速
+//                textToSpeech.setSpeechRate(3f);
+//                //输入中文，若不支持的设备则不会读出来
+//                textToSpeech.speak(Integer.toString(((int)msg.obj)),
+//                        TextToSpeech.QUEUE_FLUSH, null);
             }
 
         }

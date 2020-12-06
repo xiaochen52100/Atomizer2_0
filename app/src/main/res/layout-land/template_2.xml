@@ -56,42 +56,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="450dp"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="模式名称:"
-                        android:textSize="23dp"
-                        android:textColor="#EEEEEE"
-                        android:layout_gravity="bottom">
-                    </TextView>
-                    <TextView
-                        android:id="@+id/modeTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="广谱模式"
-                        android:textSize="23dp"
-                        android:textColor="#EEEEEE"
-                        android:layout_gravity="bottom">
-                    </TextView>
-
-<!--                    <Spinner-->
-<!--                        android:id="@+id/modeSpinner"-->
-<!--                        android:layout_width="150dp"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textSize="25sp"-->
-<!--                        android:textColor="#EEEEEE"-->
-<!--                        android:layout_marginLeft="20dp"-->
-<!--                        android:layout_marginBottom="5dp"-->
-<!--                        android:layout_gravity="bottom"-->
-<!--                        android:entries="@array/mode"/>-->
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:orientation="horizontal">
                     <TextView
@@ -118,9 +85,34 @@
                         android:text="房间1" />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="450dp"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="负责人："
+                        android:textSize="23dp"
+                        android:textColor="#EEEEEE"
+                        android:layout_gravity="bottom">
 
+                    </TextView>
+                    <EditText
+                        android:id="@+id/roomPrincipal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:typeface="monospace"
+                        android:textSize="23dp"
+                        android:textColor="#EEEEEE"
+                        android:layout_gravity="bottom"
+                        android:ems="10"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:text="" />
 
-
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -137,7 +129,7 @@
                         android:typeface="normal"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:text="空间面积:" />
+                        android:text="空间体积:" />
                     <EditText
                         android:id="@+id/roomArea"
                         android:layout_width="wrap_content"
@@ -155,7 +147,7 @@
                         android:layout_marginLeft="20dp"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:text="   ㎡ "
+                        android:text="   m³ "
                         >
                     </TextView>
                 </LinearLayout>
@@ -202,16 +194,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <Button
-                        android:id="@+id/useLwhBtn"
+
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:typeface="normal"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:background="@drawable/buttom_verticl2"
-                        android:text="使用长宽高" />
-<!--                    android:background="@drawable/button_verticl"-->
+                        android:text="长："
+                        >
+                    </TextView>
                     <EditText
                         android:id="@+id/editRoomLength"
                         android:layout_width="wrap_content"
@@ -221,7 +212,7 @@
                         android:textColor="#EEEEEE"
                         android:inputType="number"
                         android:imeOptions="actionDone"
-                        android:ems="5">
+                        android:ems="3">
                     </EditText>
                     <TextView
                         android:layout_width="wrap_content"
@@ -235,10 +226,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
+                        android:layout_marginLeft="20dp"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:text="×"
+                        android:text="×  宽： "
                         >
                     </TextView>
                     <EditText
@@ -250,7 +241,7 @@
                         android:textColor="#EEEEEE"
                         android:inputType="number"
                         android:imeOptions="actionDone"
-                        android:ems="5">
+                        android:ems="3">
                     </EditText>
                     <TextView
                         android:layout_width="wrap_content"
@@ -267,7 +258,7 @@
                         android:layout_marginLeft="40dp"
                         android:textSize="23dp"
                         android:textColor="#EEEEEE"
-                        android:text="×"
+                        android:text="×  高： "
                         >
                     </TextView>
                     <EditText
@@ -279,7 +270,7 @@
                         android:textColor="#EEEEEE"
                         android:inputType="number"
                         android:imeOptions="actionDone"
-                        android:ems="5">
+                        android:ems="3">
                     </EditText>
                     <TextView
                         android:layout_width="wrap_content"
@@ -290,6 +281,16 @@
                         android:text="   m"
                         >
                     </TextView>
+                    <Button
+                        android:id="@+id/useLwhBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:typeface="normal"
+                        android:textSize="23dp"
+                        android:layout_marginLeft="50dp"
+                        android:textColor="#EEEEEE"
+                        android:background="@drawable/buttom_verticl2"
+                        android:text="计算" />
                 </LinearLayout>
 <!--                <LinearLayout-->
 <!--                    android:layout_width="wrap_content"-->

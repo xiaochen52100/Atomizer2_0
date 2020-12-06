@@ -2,6 +2,7 @@ package com.example.atomizer2_0.ui.main;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -45,7 +46,6 @@ import static com.example.atomizer2_0.ui.main.QuickDisinfectionFragment.startBut
 public class BroadDisnfectionFragment extends Fragment implements View.OnClickListener{
     private BroadDisnfectionViewModel mBroadDisnfectionViewModel;
     private Button buttonParameter;
-    private EditText principalEditText;
     private static TextView countTimeText;
     private TextView tempretureTextView;
     private TextView humidityTextView;
@@ -58,6 +58,8 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
     protected static DashboardView tempDashboardView,humDashboardView,levelDashboard;
     private static CircularProgressView circularProgressView;
     private static CircleProgress mCpLoading;
+    private CountDownTimer counttimer;
+    private boolean countFlag=false;
     public static BroadDisnfectionFragment newInstance() {
         return new BroadDisnfectionFragment();
     }
@@ -73,7 +75,6 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
         MainActivity.lastFragmentId=R.id.broad_disinfection_fragment;
         MainActivity.mode=1;
         buttonParameter=root.findViewById(R.id.buttonParameter);
-        principalEditText=root.findViewById(R.id.principalEditText);
         countTimeText=root.findViewById(R.id.countTimeText);
 //        tempretureTextView=root.findViewById(R.id.tempretureTextView);
 //        humidityTextView=root.findViewById(R.id.humidityTextView);
@@ -101,7 +102,6 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
         homeButton.setOnClickListener(this);
         buttonParameter.setOnClickListener(this);
         startButton.setOnClickListener(this);
-        editTextListen();
         roomName=root.findViewById(R.id.roomName);
         roomArea=root.findViewById(R.id.roomArea);
         roomTime=root.findViewById(R.id.roomTime);
@@ -126,24 +126,6 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
         mBroadDisnfectionViewModel = ViewModelProviders.of(this).get(BroadDisnfectionViewModel.class);
         // TODO: Use the ViewModel
     }
-    private void editTextListen(){
-        principalEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                nowRoomData.setPrincipal(principalEditText.getText().toString());
-            }
-        });
-    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -154,62 +136,60 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
                 Log.e("tag","buttonParameter");
                 break;
             case R.id.startButton:
-                if (!principalEditText.getText().toString().equals("")){
-                    if (!MainActivity.state&&nowRoomData.getRoomTime()>0){
+                    if (!MainActivity.state&&nowRoomData.getRoomTime()>0&&!countFlag){
                     if (nowRoomData.getRoomName().equals("未选择任务")){
                         Toast.makeText(getContext(), "请先选择任务", Toast.LENGTH_LONG).show();
                     }else{
-                        startButton.setEnabled(false);
-                        TimerTask task = new TimerTask(){
-                            public void run(){
-                                Message msg1 = new Message();
-                                msg1.what = 8;
-                                broadHandler.sendMessage(msg1);
+
+                        countFlag=true;
+                        counttimer = new CountDownTimer(10000, 1000) {
+
+                            @Override
+                            public void onTick(long millisUntilFinished) {
+                                startButton.setText(((millisUntilFinished-1) / 1000)+"秒后开始");
+//                            Message msg1 = new Message();
+//                            msg1.what =7;
+//                            msg1.obj=(int)(millisUntilFinished-1) / 1000;
+//                            quickHandler.sendMessage(msg1);
+
+                            }
+
+                            @Override
+                            public void onFinish() {
+                                startButton.setText("停止");
+//                                nowRoomData.setTaskData(barDate.getText().toString());
+//                                nowRoomData.setPrincipal(" ");
+//                                if(historyData.size()<100){
+//                                    historyData.add(nowRoomData);
+//                                }else {
+//                                    historyData.remove(0);
+//                                    historyData.add(nowRoomData);
+//                                }
+//                                sharedPreferenceUtil.writeObject(getContext(),"HistoryList",historyData);
+                                long currentTime = System.currentTimeMillis();
+                                MainActivity.Countdown=currentTime+nowRoomData.getRoomTime()*60*1000;
+                                MainActivity.state=true;
+                                Toast.makeText(getContext(), "开启任务", Toast.LENGTH_LONG).show();
+                                countFlag=false;
                             }
                         };
-                        Timer timer = new Timer();
-                        timer.schedule(task,5000);
-                        //byte[] sendBuf={0x25};
-                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
-                        nowRoomData.setTaskData(barDate.getText().toString());
-                        if(historyData.size()<100){
-                            historyData.add(nowRoomData);
-                        }else {
-                            historyData.remove(0);
-                            historyData.add(nowRoomData);
-                        }
-                        sharedPreferenceUtil.writeObject(getContext(),"HistoryList",historyData);
-                        long currentTime = System.currentTimeMillis();
-                        MainActivity.Countdown=currentTime+nowRoomData.getRoomTime()*60*1000;
-                        MainActivity.state=true;
-                        startButton.setText("停止");
-                        Toast.makeText(getContext(), "开启任务", Toast.LENGTH_LONG).show();
+                        counttimer.start();
                     }
 
-                    }else if(MainActivity.state){
-                        startButton.setEnabled(false);
-                        TimerTask task = new TimerTask(){
-                            public void run(){
-                                Message msg1 = new Message();
-                                msg1.what = 8;
-                                broadHandler.sendMessage(msg1);
-                            }
-                        };
-                        Timer timer = new Timer();
-                        timer.schedule(task,5000);
-                        //byte[] sendBuf={0x29};
-                        //MainActivity.serialPortThread.sendSerialPort(sendBuf);
+                    }else if(MainActivity.state&&!countFlag){
                         countTimeText.setText("00:00");
                         circularProgressView.setProgress(0);
                         MainActivity.Countdown=System.currentTimeMillis();
                         startButton.setText("开始");
-                        //startButton.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.button_corner));
-                        MainActivity.state=false;
                         Toast.makeText(getContext(), "关闭任务", Toast.LENGTH_LONG).show();
+                    }else if(!MainActivity.state&&nowRoomData.getRoomTime()>0&&countFlag){
+                        if (counttimer!=null){
+                            counttimer.cancel();
+                            startButton.setText("开始");
+                            MainActivity.state=false;
+                            countFlag=false;
+                        }
                     }
-                }else{
-                    Toast.makeText(getContext(), "请输入负责人", Toast.LENGTH_LONG).show();
-                }
 
                 break;
             case R.id.homeButton:
