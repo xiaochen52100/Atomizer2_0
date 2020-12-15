@@ -1,7 +1,0 @@
-Change Component Footprint: Designator=X1 Old Footprint=OSC-3x8-LI New Footprint=OSC HC-49SMD
-Change Component Footprint: Designator=X2 Old Footprint=OSC HC-49SMD New Footprint=OSC-3x10-LI
-Added Member To Class: ClassName=Atomizer Member=Component E1 10uF/10V
-Added Member To Class: ClassName=Atomizer Member=Component E3 10uF/10V
-Added Member To Class: ClassName=Atomizer Member=Component JP7 HDR-1X4
-Added Member To Class: ClassName=Atomizer Member=Component JP11 Header 5X2
-Added Room: Name=Atomizer
