@@ -1,0 +1,6 @@
+Added Component: Designator=JP14(HDR2.54-LI-3P)
+Added Pin To Net: NetName=RX2 Pin=JP14-1
+Added Pin To Net: NetName=TX2 Pin=JP14-2
+Added Pin To Net: NetName=GND Pin=JP14-3
+Added Member To Class: ClassName=Atomizer Member=Component JP14 HDR-1X3
+Added Room: Name=Atomizer

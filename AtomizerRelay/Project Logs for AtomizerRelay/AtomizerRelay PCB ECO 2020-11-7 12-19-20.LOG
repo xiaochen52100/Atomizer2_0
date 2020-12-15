@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=CHS Pin=M3-1
+Change Component Footprint: Designator=X1 Old Footprint=OSC HC-49SMD New Footprint=SMD-5032_2P
+Change Component Footprint: Designator=VD1 Old Footprint=SMA New Footprint=SOD-323
+Change Component Footprint: Designator=VD2 Old Footprint=SMA New Footprint=SOD-323
+Change Component Footprint: Designator=VD3 Old Footprint=SMA New Footprint=SOD-323
+Change Component Footprint: Designator=VD4 Old Footprint=SMA New Footprint=SOD-323
+Change Component Footprint: Designator=IC1 Old Footprint=TSSOP16_N New Footprint=TSSOP-16
+Change Component Comment : Designator=X1 Old Comment=12MHz New Comment=8MHz
+Added Room: Name=Atomizer

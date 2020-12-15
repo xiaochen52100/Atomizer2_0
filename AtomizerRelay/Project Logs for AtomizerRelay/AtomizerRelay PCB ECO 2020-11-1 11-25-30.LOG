@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=RX2 Pin=JP13-10
+Removed Pin From Net: NetName=TX2 Pin=JP13-11
+Removed Pin From Net: NetName=RX2 Pin=JP14-1
+Removed Pin From Net: NetName=TX2 Pin=JP14-2
+Added Pin To Net: NetName=RX3 Pin=JP13-10
+Added Pin To Net: NetName=TX3 Pin=JP13-11
+Added Pin To Net: NetName=RX3 Pin=JP14-1
+Added Pin To Net: NetName=TX3 Pin=JP14-2
+Added Room: Name=Atomizer

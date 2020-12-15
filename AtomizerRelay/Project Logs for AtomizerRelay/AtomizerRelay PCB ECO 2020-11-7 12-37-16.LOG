@@ -1,0 +1,5 @@
+Change Component Footprint: Designator=VD1 Old Footprint=SOD-323 New Footprint=SMA(DO-214AC)_S1
+Change Component Footprint: Designator=VD2 Old Footprint=SOD-323 New Footprint=SMA(DO-214AC)_S1
+Change Component Footprint: Designator=VD3 Old Footprint=SOD-323 New Footprint=SMA(DO-214AC)_S1
+Change Component Footprint: Designator=VD4 Old Footprint=SOD-323 New Footprint=SMA(DO-214AC)_S1
+Added Room: Name=Atomizer

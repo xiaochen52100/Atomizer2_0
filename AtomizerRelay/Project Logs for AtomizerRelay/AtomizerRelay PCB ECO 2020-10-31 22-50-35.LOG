@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=5V Pin=C39-2
+Removed Pin From Net: NetName=5V Pin=V1-3
+Added Component: Designator=E?(CT 5*6 - C)
+Added Component: Designator=L?(CD32)
+Added Pin To Net: NetName=5V Pin=E?-1
+Added Pin To Net: NetName=GND Pin=E?-2
+Added Pin To Net: NetName=5V Pin=L?-1
+Added Pin To Net: NetName=NetL?_2 Pin=L?-2
+Added Pin To Net: NetName=NetL?_2 Pin=V1-3
+Added Net: Name=NetL?_2
+Added Member To Class: ClassName=Atomizer Member=Component E? 10uF/10V
+Added Member To Class: ClassName=Atomizer Member=Component L? 10uH
+Added Room: Name=Atomizer
