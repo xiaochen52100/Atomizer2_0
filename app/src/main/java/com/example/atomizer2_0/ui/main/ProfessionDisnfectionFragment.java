@@ -1,5 +1,6 @@
 package com.example.atomizer2_0.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import com.example.atomizer2_0.CircleProgress;
 import com.example.atomizer2_0.CircularProgressView;
 import com.example.atomizer2_0.DashboardView;
+import com.example.atomizer2_0.HorizonService;
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 
@@ -44,7 +46,7 @@ public class ProfessionDisnfectionFragment extends Fragment implements View.OnCl
     private SeekBar seekBarLevel;
     private TextView roomName;
     private EditText roomArea,roomTime;
-    protected static Button startButton;
+    protected static Button startButton,testButton;
     private LinearLayout homeButton;
     private CountDownTimer counttimer;
     private boolean countFlag=false;
@@ -61,6 +63,7 @@ public class ProfessionDisnfectionFragment extends Fragment implements View.OnCl
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.profession_disinfection_2, container, false);
         startButton=root.findViewById(R.id.startButton);
+        testButton=root.findViewById(R.id.testButton);
         MainActivity.nowFragmentId=R.id.profession_disinfection_fragment;
         MainActivity.lastFragmentId=R.id.profession_disinfection_fragment;
         MainActivity.mode=2;
@@ -92,6 +95,7 @@ public class ProfessionDisnfectionFragment extends Fragment implements View.OnCl
         homeButton.setOnClickListener(this);
         buttonParameter.setOnClickListener(this);
         startButton.setOnClickListener(this);
+        testButton.setOnClickListener(this);
         roomName=root.findViewById(R.id.roomName);
         roomArea=root.findViewById(R.id.roomArea);
         roomTime=root.findViewById(R.id.roomTime);
@@ -183,6 +187,11 @@ public class ProfessionDisnfectionFragment extends Fragment implements View.OnCl
                             countFlag=false;
                         }
                     }
+                break;
+            case R.id.testButton:
+                nowRoomData.setMode("专业消毒");
+                Intent intent = new Intent(getContext(), HorizonService.class);
+                getContext().startService(intent);
                 break;
             case R.id.homeButton:
                 if (MainActivity.state){

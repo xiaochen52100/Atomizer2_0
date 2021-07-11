@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static List<Boolean> checkList=new ArrayList<Boolean>();
     public static SerialPortThread serialPortThread;
     public static TextToSpeech textToSpeech = null;
+    public static boolean testFlag=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void run() {
             long currentTime = System.currentTimeMillis();
             if (state){
-                Log.e("tag","mode:"+nowRoomData.getMode());
+                //Log.e("tag","mode:"+nowRoomData.getMode());
                 if (currentTime>=Countdown){
                     Message msg1 = new Message();
                     msg1.what = 4;

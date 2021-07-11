@@ -45,7 +45,7 @@ public class SerialPortThread {
                     while (alive.get()) {
                         if (serialPort != null) {
                             byte[] recvBytes = serialPort.receiveData(true);
-                            if (recvBytes != null && recvBytes.length > 0) {
+                            if (recvBytes != null && recvBytes.length >= 11) {
                                 Log.i("tag", "recvBytes === " + SerialPort.bytesToHexString(recvBytes, recvBytes.length));
                                 Message msg = new Message();
                                 msg.what = 2;
