@@ -32,7 +32,9 @@ import com.example.atomizer2_0.Adapter.RoomData;
 import com.example.atomizer2_0.MainActivity;
 import com.example.atomizer2_0.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.atomizer2_0.MainActivity.historyData;
@@ -53,6 +55,7 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
     private SeekBar seekBarRoomTime;
     private Button confirmBtn;
     private Button useLwhBtn;
+    private Button backBtn;
     private EditText editRoomTime;
     private Spinner modeSpinner;
     private EditText editRoomHeight,editRoomWidth,editRoomLength;
@@ -85,6 +88,8 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
         editRoomLength=(EditText)root.findViewById(R.id.editRoomLength);
         roomPrincipal=(EditText)root.findViewById(R.id.roomPrincipal);
         useLwhBtn=(Button)root.findViewById(R.id.useLwhBtn);
+        backBtn=(Button)root.findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(this);
         confirmBtn.setOnClickListener(this);
         useLwhBtn.setOnClickListener(this);
         if (roomDataTemplate==null){
@@ -143,13 +148,22 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.e("tag",moreHistoryAdapter.getItem(position).getRoomName());
+                Log.e("tag",moreHistoryAdapter.getItem(position).getRoomTime()+"");
                 if (!moreHistoryAdapter.getItem(position).getMode().equals("快速消毒")){
-                    roomDataTemplate=moreHistoryAdapter.getItem(position);
-                    roomName.setText(roomDataTemplate.getRoomName());
-                    roomArea.setText(roomDataTemplate.getRoomArea()+"");
-                    seekBarRoomTime.setProgress(roomDataTemplate.getRoomProcess());
-                    editRoomTime.setText(roomDataTemplate.getRoomTime()+"");
-                    roomPrincipal.setText(roomDataTemplate.getPrincipal());
+                    //roomDataTemplate=moreHistoryAdapter.getItem(position);
+                    roomDataTemplate.setPrincipal(moreHistoryAdapter.getItem(position).getPrincipal());
+                    roomDataTemplate.setRoomTime(moreHistoryAdapter.getItem(position).getRoomTime());
+                    roomDataTemplate.setRoomArea(moreHistoryAdapter.getItem(position).getRoomArea());
+                    roomDataTemplate.setRoomName(moreHistoryAdapter.getItem(position).getRoomName());
+                    roomDataTemplate.setMode(moreHistoryAdapter.getItem(position).getMode());
+                    roomDataTemplate.setRoomProcess(moreHistoryAdapter.getItem(position).getRoomProcess());
+                    roomDataTemplate.setTaskData(getDate());
+                    roomName.setText(moreHistoryAdapter.getItem(position).getRoomName());
+                    roomArea.setText(moreHistoryAdapter.getItem(position).getRoomArea()+"");
+                    seekBarRoomTime.setProgress(moreHistoryAdapter.getItem(position).getRoomProcess());
+                    editRoomTime.setText(moreHistoryAdapter.getItem(position).getRoomTime()+"");
+                    Log.e("tag",roomDataTemplate.getRoomTime()+"");
+                    roomPrincipal.setText(moreHistoryAdapter.getItem(position).getPrincipal());
 
 
                 }
@@ -226,6 +240,7 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                 int time=(int)timeDouble;
                 editRoomTime.setText(time+"");
                 roomDataTemplate.setRoomTime(time);
+                roomDataTemplate.setRoomProcess(seekBar.getProgress());
 //                templateRoomData.get(position).setRoomTime(time);
 //                templateRoomData.get(position).setRoomProcess(seekBar.getProgress());
 //                MainActivity.sharedPreferenceUtil.writeObject(getContext(),"templateRoomData",templateRoomData);
@@ -422,7 +437,12 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
         // TODO: Use the ViewModel
 
     }
-
+    private String getDate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
+        //获取当前时间
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -440,6 +460,9 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                 roomArea.setText(roomDataTemplate.getRoomArea()+"");
                 seekBarRoomTime.setProgress(roomDataTemplate.getRoomProcess());
                 editRoomTime.setText(roomDataTemplate.getRoomTime()+"");
+                editRoomHeight.setText("");
+                editRoomWidth.setText("");
+                editRoomLength.setText("");
 
                 if (MainActivity.lastFragmentId==R.id.broad_disinfection_fragment){
 
@@ -543,6 +566,17 @@ public class TemplateFragment2 extends Fragment implements View.OnClickListener{
                         }
                     }
                     useLwh=true;
+                }
+                break;
+            case R.id.backBtn:
+                if (roomDataTemplate.getMode().equals("广谱消毒")){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, BroadDisnfectionFragment.newInstance())
+                            .commitNow();
+                }else if(roomDataTemplate.getMode().equals("专业消毒")){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, ProfessionDisnfectionFragment.newInstance())
+                            .commitNow();
                 }
                 break;
         }

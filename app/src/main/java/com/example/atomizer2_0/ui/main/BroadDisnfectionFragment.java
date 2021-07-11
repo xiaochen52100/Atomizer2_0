@@ -130,10 +130,12 @@ public class BroadDisnfectionFragment extends Fragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.buttonParameter:
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, TemplateFragment2.newInstance())
-                        .commitNow();
-                Log.e("tag","buttonParameter");
+                if (!MainActivity.state){
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.container, TemplateFragment2.newInstance())
+                            .commitNow();
+                    Log.e("tag","buttonParameter");
+                }
                 break;
             case R.id.startButton:
                     if (!MainActivity.state&&nowRoomData.getRoomTime()>0&&!countFlag){
